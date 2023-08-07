@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    void Start()
-    {
-    }
+    private float _jumpVelocity = 400;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (col.relativeVelocity.y <= 0)
         {
-            Debug.Log("COLLISION !!!!");
-            var rB = other.gameObject.GetComponent<Rigidbody2D>();
-            rB.velocity = new Vector2(0, 400 * Time.deltaTime);
+            var playerRb = col.collider.GetComponent<Rigidbody2D>();
+            if (playerRb == null) return;
+            var playerVelocity = playerRb.velocity;
+            playerVelocity.y = _jumpVelocity * Time.deltaTime;
+            playerRb.velocity = playerVelocity;
         }
-    }
 
+        
+    }
 }

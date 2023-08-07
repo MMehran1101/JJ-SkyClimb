@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4665964678810942970}
   - component: {fileID: 4665964678810942971}
   - component: {fileID: 1361091976}
-  - component: {fileID: 1373644890}
   - component: {fileID: 1373644889}
+  - component: {fileID: 3660111836133845652}
   m_Layer: 0
   m_Name: Platform-Normal
   m_TagString: Untagged
@@ -99,7 +99,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b668214b6d42d4e8989101c7fc9d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!68 &1373644890
+--- !u!251 &1373644889
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665964678810942972}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 0
+--- !u!68 &3660111836133845652
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,32 +131,12 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.35}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.38199353, y: -0.2491591}
-  - {x: 0.007704735, y: -0.33915454}
-  - {x: 0.45009643, y: -0.254538}
+  - {x: -0.46, y: 0.1}
+  - {x: 0.52, y: 0.1}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!251 &1373644889
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4665964678810942972}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_RotationalOffset: 0
-  m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 180
