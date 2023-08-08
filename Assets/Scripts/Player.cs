@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private float _horizontalInput;
-    private float _playerMoveSpeed = 400;
+    private float _playerMoveSpeed = 250;
     private Rigidbody2D _playerRb;
     private SpriteRenderer _spriteRenderer;
 
