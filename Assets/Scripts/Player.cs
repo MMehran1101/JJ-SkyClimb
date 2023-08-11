@@ -16,10 +16,13 @@ public class Player : MonoBehaviour
     private void Update()
     {
         PlayerController();
+        CalculateScore();
     }
+
     private void FixedUpdate()
     {
         CalculatePlayerVelocity();
+        CheckXBounds();
     }
 
     private void CalculatePlayerVelocity()
@@ -32,14 +35,12 @@ public class Player : MonoBehaviour
     private void PlayerController()
     {
         _horizontalInput = Input.GetAxis("Horizontal") * (Time.deltaTime * _playerMoveSpeed);
-        
+
         // Flip sprite when character going left of right
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             _spriteRenderer.flipX = true;
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             _spriteRenderer.flipX = false;
-
-        CheckXBounds();
     }
 
     private void CheckXBounds()
@@ -52,7 +53,11 @@ public class Player : MonoBehaviour
             _ => position
         };
         transform.position = position;
-    }   
+    }
 
-   
+    private void CalculateScore()
+    {
+        var s = transform.position.y * 100;
+        GameManager.Instance.UpdateScore((int) s);
+    }
 }
