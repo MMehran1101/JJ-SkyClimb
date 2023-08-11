@@ -114,10 +114,10 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 145
   m_UseSideFriction: 0
   m_UseSideBounce: 0
-  m_SideArc: 90
+  m_SideArc: 0
 --- !u!68 &3660111836133845652
 EdgeCollider2D:
   m_ObjectHideFlags: 0
