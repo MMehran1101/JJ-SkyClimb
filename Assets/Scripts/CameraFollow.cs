@@ -9,9 +9,6 @@ public class CameraFollow : MonoBehaviour
     private const float SmoothTime = 0.2f;
     private Vector2 _currentVelocity;
 
-    private void Update()
-    {
-    }
 
     private void LateUpdate()
     {

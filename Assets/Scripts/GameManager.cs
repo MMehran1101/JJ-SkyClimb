@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 0;
-        Debug.Log("Game overrrr");
+        UIManager.Instance.EnableGameOverPanel();
+        Debug.Log("Game Over");
     }
 }
