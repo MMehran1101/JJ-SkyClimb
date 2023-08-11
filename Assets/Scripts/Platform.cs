@@ -6,13 +6,16 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.relativeVelocity.y <= 0)
+        if (col.gameObject.CompareTag("Player"))
         {
-            var playerRb = col.collider.GetComponent<Rigidbody2D>();
-            if (playerRb == null) return;
-            var playerVelocity = playerRb.velocity;
-            playerVelocity.y = _jumpVelocity * Time.deltaTime;
-            playerRb.velocity = playerVelocity;
+            if (col.relativeVelocity.y <= 0)
+            {
+                var playerRb = col.collider.GetComponent<Rigidbody2D>();
+                if (playerRb == null) return;
+                var playerVelocity = playerRb.velocity;
+                playerVelocity.y = _jumpVelocity * Time.deltaTime;
+                playerRb.velocity = playerVelocity;
+            }
         }
     }
 }
