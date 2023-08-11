@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +15,9 @@ public class CameraFollow : MonoBehaviour
         {
             var position = transform.position;
             var newPos = new Vector2(position.x, playerTransform.position.y);
-            position = Vector2.SmoothDamp(position,
+            position=Vector2.SmoothDamp(position,
                 newPos, ref _currentVelocity, SmoothTime); // smooth moving cam
-            transform.position = position; 
+            transform.position = position;
         }
     }
 }
