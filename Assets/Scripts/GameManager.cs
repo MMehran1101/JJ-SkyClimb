@@ -30,6 +30,5 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         UIManager.Instance.EnableGameOverPanel();
-        Debug.Log("Game Over");
     }
 }
