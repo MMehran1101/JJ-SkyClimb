@@ -17,10 +17,6 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.SetTextScore(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     public void UpdateScore(int score)
     {
@@ -29,6 +25,10 @@ public class GameManager : MonoBehaviour
             _score = score;
             UIManager.Instance.SetTextScore(_score);
         }
+    }
 
+    public void GameOver()
+    {
+        UIManager.Instance.EnableGameOverPanel();
     }
 }

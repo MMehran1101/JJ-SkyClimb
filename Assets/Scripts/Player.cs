@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -60,4 +61,5 @@ public class Player : MonoBehaviour
         var s = transform.position.y * 100;
         GameManager.Instance.UpdateScore((int) s);
     }
+    
 }
