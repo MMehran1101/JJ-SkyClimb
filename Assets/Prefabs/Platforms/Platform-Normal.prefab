@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4665964678810942970}
   - component: {fileID: 4665964678810942971}
-  - component: {fileID: 1361091976}
   - component: {fileID: 1373644889}
   - component: {fileID: 3660111836133845652}
+  - component: {fileID: 5011322713844370914}
   m_Layer: 0
   m_Name: Platform-Normal
   m_TagString: Platform
@@ -88,18 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1361091976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4665964678810942972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b668214b6d42d4e8989101c7fc9d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!251 &1373644889
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -111,7 +99,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
@@ -141,6 +129,18 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &5011322713844370914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665964678810942972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab3d68aed3606042ad83d7c799ff2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5717616905498790804
 GameObject:
   m_ObjectHideFlags: 0
