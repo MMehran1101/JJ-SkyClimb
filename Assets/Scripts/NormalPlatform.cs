@@ -1,14 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class NormalPlatform : MonoBehaviour
 {
+    private float _currentVelocity;
     private float _jumpVelocity = 350;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        _currentVelocity = col.gameObject.GetComponent<Rigidbody2D>().velocity.y;
         if (col.gameObject.CompareTag("Player"))
         {
-            if (col.relativeVelocity.y <= 0)
+            if (_currentVelocity <= 0)
             {
                 var playerRb = col.collider.GetComponent<Rigidbody2D>();
                 if (playerRb == null) return;
