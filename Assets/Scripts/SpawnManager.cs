@@ -16,7 +16,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        _spawnPos = new Vector2();
+        _spawnPos = new Vector2(0,-2);
         StartCoroutine(InstantiateRoutine());
     }
 

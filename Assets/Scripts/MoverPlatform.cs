@@ -8,7 +8,8 @@ public class MoverPlatform : MonoBehaviour
     private float _currentVelocity;
     private float _jumpVelocity = 350;
     private Rigidbody2D _moverRb;
-
+    [SerializeField] private AudioSource jumpAudio;
+    
     private void Start()
     {
         _moverRb = gameObject.GetComponent<Rigidbody2D>();
@@ -40,6 +41,7 @@ public class MoverPlatform : MonoBehaviour
         {
             if (_currentVelocity <= 0)
             {
+                jumpAudio.Play();
                 var playerRb = col.collider.GetComponent<Rigidbody2D>();
                 if (playerRb == null) return;
                 var playerVelocity = playerRb.velocity;
