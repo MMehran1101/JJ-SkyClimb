@@ -54,6 +54,10 @@ public class SpawnManager : MonoBehaviour
             Instantiate(enemies[Random.Range(0,2)], _spawnPos, quaternion.identity);
         }
 
+        _spawnPos.y += Random.Range(-1f, 0f);
+        _spawnPos.x = Random.Range(-2f, 2f);
+        Instantiate(platforms[0], _spawnPos, quaternion.identity);
+        
         _isInstantiate = true;
     }
 }
