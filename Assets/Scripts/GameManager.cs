@@ -1,4 +1,5 @@
 using System;
+using MenuUI;
 using TMPro;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     private int _score;
     public static GameManager Instance;
+    [SerializeField] private AudioSource eventAudio;
+    [SerializeField] private AudioClip gameOverClip;
 
     private void Awake()
     {
@@ -41,6 +44,8 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
+        eventAudio.clip = gameOverClip;
+        eventAudio.Play();
         UIManager.Instance.EnableGameOverPanel();
     }
 }
