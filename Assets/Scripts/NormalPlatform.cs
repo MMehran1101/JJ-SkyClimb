@@ -6,6 +6,7 @@ public class NormalPlatform : MonoBehaviour
 {
     private float _currentVelocity;
     private float _jumpVelocity = 350;
+    [SerializeField] private AudioSource jumpAudio;
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -14,6 +15,7 @@ public class NormalPlatform : MonoBehaviour
         {
             if (_currentVelocity <= 0)
             {
+                jumpAudio.Play();
                 var playerRb = col.collider.GetComponent<Rigidbody2D>();
                 if (playerRb == null) return;
                 var playerVelocity = playerRb.velocity;

@@ -17,13 +17,17 @@ public class Player : MonoBehaviour
     private void Update()
     {
         PlayerController();
-        CalculateScore();
     }
 
     private void FixedUpdate()
     {
         CalculatePlayerVelocity();
         CheckXBounds();
+    }
+
+    private void LateUpdate()
+    {
+        CalculateScore();
     }
 
     private void CalculatePlayerVelocity()
