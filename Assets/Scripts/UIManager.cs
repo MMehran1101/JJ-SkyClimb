@@ -58,4 +58,5 @@ public class UIManager : MonoBehaviour
     {
         highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
+    
 }

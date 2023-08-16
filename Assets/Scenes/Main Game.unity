@@ -630,6 +630,9 @@ MonoBehaviour:
   - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
   - {fileID: 6113430699798577720, guid: d147f94f77a4dad468a4699876e0d651, type: 3}
   - {fileID: 4777023188797152690, guid: 2994ac7e09ed8fb42bbfb24fac2f3a6b, type: 3}
+  enemies:
+  - {fileID: 5844761925419477028, guid: 5745863b30e274342b4e77b334d17b6b, type: 3}
+  - {fileID: 2655666175777236867, guid: f2f4c2a51b15cca40a2f762f9c08fabc, type: 3}
 --- !u!4 &217433991
 Transform:
   m_ObjectHideFlags: 0
@@ -1624,7 +1627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2265,7 +2268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816210962}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 5, z: 0}
+  m_LocalPosition: {x: 0.1, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

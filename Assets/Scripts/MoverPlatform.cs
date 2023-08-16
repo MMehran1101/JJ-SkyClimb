@@ -17,6 +17,11 @@ public class MoverPlatform : MonoBehaviour
 
     private void Update()
     {
+        AnimateMoving();
+    }
+
+    private void AnimateMoving()
+    {
         switch (transform.position.x)
         {
             case < -2f:
