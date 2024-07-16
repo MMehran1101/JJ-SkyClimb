@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Platforms")] 
+    [Header("List of Objects")] 
     [SerializeField] private GameObject[] platforms;
     [SerializeField] private GameObject[] enemies;
 
@@ -22,7 +22,8 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (_isInstantiate && _platformCount <= 500) StartCoroutine(InstantiateRoutine());
+        if (_isInstantiate && _platformCount <= 500) 
+            StartCoroutine(InstantiateRoutine());
     }
 
 

@@ -2607,6 +2607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97286329471f48d478b50e48ba88b326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 816210962}
   eventAudio: {fileID: 940351464}
   gameOverClip: {fileID: 8300000, guid: 9e1a6031d06f1c3438d4e7570687018f, type: 3}
 --- !u!82 &940351464
@@ -3426,7 +3427,7 @@ SpriteRenderer:
   m_SortingLayerID: 308580619
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e0f3a2ac5a8fa4449b88956aede59399, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77bedfa49add3f24d8f0f3bbe810fd77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3445,7 +3446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460327909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.16, y: 0.08, z: 10}
+  m_LocalPosition: {x: 0.16, y: 0.07999992, z: 10}
   m_LocalScale: {x: 0.39931017, y: 0.53353006, z: 0.10243449}
   m_ConstrainProportionsScale: 0
   m_Children: []
