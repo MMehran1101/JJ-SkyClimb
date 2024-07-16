@@ -633,6 +633,15 @@ MonoBehaviour:
   enemies:
   - {fileID: 5844761925419477028, guid: 5745863b30e274342b4e77b334d17b6b, type: 3}
   - {fileID: 2655666175777236867, guid: f2f4c2a51b15cca40a2f762f9c08fabc, type: 3}
+  clouds:
+  - {fileID: 5589006291155121646, guid: 2ef7b68e1c49d864f8b9a517567bc1b9, type: 3}
+  - {fileID: 3030931254687731761, guid: 92edc3e698650a24a819e577271da44e, type: 3}
+  - {fileID: 6642053880670413982, guid: a279314a722c2f843ac27dfde6ab2b0d, type: 3}
+  - {fileID: 7652451847343653498, guid: 69a051c2f72ef054cbc0a0873929105b, type: 3}
+  - {fileID: 5283670474984810056, guid: 8d01fe2b1d28f604c911dbd575746507, type: 3}
+  - {fileID: 1588761924108477445, guid: 159c6e04636870046813e1e38bfc0342, type: 3}
+  - {fileID: 8252541957736850637, guid: b48130c76c59c674b978ab01f36df42f, type: 3}
+  - {fileID: 7252295325031855989, guid: 4b71a271b647b6549bece678ed90afde, type: 3}
 --- !u!4 &217433991
 Transform:
   m_ObjectHideFlags: 0
