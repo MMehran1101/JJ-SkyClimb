@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float _horizontalInput;
-    private float _playerMoveSpeed = 250;
+    private float _movement;
+    private float _moveSpeed = 200;
     private Rigidbody2D _playerRb;
     private SpriteRenderer _spriteRenderer;
 
@@ -16,11 +16,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        PlayerController();
+        _movement = Input.GetAxis("Horizontal") * (_moveSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
+        PlayerController();
         CalculatePlayerVelocity();
         CheckXBounds();
     }
@@ -33,14 +34,12 @@ public class Player : MonoBehaviour
     private void CalculatePlayerVelocity()
     {
         var xVelocity = _playerRb.velocity;
-        xVelocity.x = _horizontalInput;
+        xVelocity.x = _movement;
         _playerRb.velocity = xVelocity;
     }
 
     private void PlayerController()
     {
-        _horizontalInput = Input.GetAxis("Horizontal") * (Time.deltaTime * _playerMoveSpeed);
-
         // Flip sprite when character going left of right
         if (Input.GetKeyDown(KeyCode.LeftArrow))
             _spriteRenderer.flipX = true;

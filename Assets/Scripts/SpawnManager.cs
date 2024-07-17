@@ -27,7 +27,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (_isInstantiate && _platformsCount <= 50)
+        if (_isInstantiate && _platformsCount <= 500)
             StartCoroutine(InstantiateRoutine());
     }
 
@@ -57,20 +57,20 @@ public class SpawnManager : MonoBehaviour
 
         // Enemies instantiate
         EnemyInstantiate();
-
-        _spawnPos.y += Random.Range(-1f, 0f);
-        _spawnPos.x = Random.Range(-2f, 2f);
-        Instantiate(platforms[0], _spawnPos, quaternion.identity);
-
+        
         _platformsCount += 10;
         _isInstantiate = true;
     }
 
     private void EnemyInstantiate()
     {
+        //_spawnPos.y += Random.Range(-1f, 0f);
+        _spawnPos.y += Random.Range(.5f, 1);
+        _spawnPos.x = Random.Range(-2f, 2f);
+        Instantiate(platforms[0], _spawnPos, quaternion.identity);
         if (_platformsCount >= 50)
         {
-            _spawnPos.y += Random.Range(1f, 2f);
+            _spawnPos.y += Random.Range(1f, 1.5f);
             _spawnPos.x = Random.Range(-2f, 2f);
             Instantiate(enemies[Random.Range(0, 2)], _spawnPos, quaternion.identity);
         }
