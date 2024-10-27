@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BackgroundTrigger : MonoBehaviour
@@ -12,6 +13,14 @@ public class BackgroundTrigger : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.GameOver();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Cloud"))
+        {
+            Destroy(other.gameObject);
         }
     }
 }

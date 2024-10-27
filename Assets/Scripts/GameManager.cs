@@ -6,7 +6,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private int _score;
+    private BoxCollider2D _playerCollider;
     public static GameManager Instance;
+    [SerializeField] private GameObject _player;
     [SerializeField] private AudioSource eventAudio;
     [SerializeField] private AudioClip gameOverClip;
 
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _score = 0;
+        _playerCollider = _player.gameObject.GetComponent<BoxCollider2D>();
         UIManager.Instance.SetTextScore(_score);
     }
 
@@ -39,11 +42,13 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighScore", _score);
         }
+
         UIManager.Instance.SetHighScoreText();
     }
-    
+
     public void GameOver()
     {
+        BoxCollider2D.Destroy(_playerCollider);
         eventAudio.clip = gameOverClip;
         eventAudio.Play();
         UIManager.Instance.EnableGameOverPanel();

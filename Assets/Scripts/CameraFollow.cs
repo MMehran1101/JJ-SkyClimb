@@ -6,20 +6,18 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
-    private const float SmoothTime = 0.2f;
+    private const float smoothTime = 0.2f;
     private Vector2 _currentVelocity;
 
 
     private void LateUpdate()
     {
-        if (transform.position.y < playerTransform.transform.position.y)
+        if (transform.position.y < playerTransform.position.y)
         {
-            var position = transform.position;
-            var newPos = new Vector2(position.x, playerTransform.position.y);
-            position = Vector2.SmoothDamp(position,
-                newPos, ref _currentVelocity, SmoothTime); // smooth moving cam
-            transform.position = position;
+            Vector2 newPos = new Vector2(transform.position.x, playerTransform.position.y);
+            transform.position = Vector2.SmoothDamp(transform.position
+                , newPos, ref _currentVelocity,
+                smoothTime * Time.deltaTime);
         }
     }
-
 }
