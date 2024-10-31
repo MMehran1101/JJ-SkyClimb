@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
@@ -10,7 +9,7 @@ namespace MenuUI
         private bool _isSoundMute;
         public static MenuUIManager Instance;
         [Header("Sound")]
-        [SerializeField] private Image soundSprite; 
+        [SerializeField] private GameObject soundSprite; 
         [SerializeField] private Sprite unmuteSound; 
         [SerializeField] private Sprite muteSound;
         
@@ -22,15 +21,18 @@ namespace MenuUI
 
         public void MuteSound()
         {
+            var soundSp = soundSprite.GetComponent<Image>();
             if (_isSoundMute)
             {
-                soundSprite.sprite = unmuteSound;
+                soundSp.sprite = unmuteSound;
                 _isSoundMute = false;
+                SoundManager.Instance.MuteSound(false);
             }
             else
             {
-                soundSprite.sprite = muteSound;
+                soundSp.sprite = muteSound;
                 _isSoundMute = true;
+                SoundManager.Instance.MuteSound(true);
             }
         }
         public void ExitGame()
