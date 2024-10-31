@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
@@ -12,6 +13,9 @@ namespace MenuUI
         [SerializeField] private GameObject soundSprite; 
         [SerializeField] private Sprite unmuteSound; 
         [SerializeField] private Sprite muteSound;
+
+        [Header("Panel")] 
+        [SerializeField] private GameObject leaderBoardPanel;
         
 
         public void PlayGame()
@@ -21,6 +25,10 @@ namespace MenuUI
         public void OpenShop()
         {
             SceneManager.LoadScene("Shop");
+        }
+        public void OpenLeaderBoardPanel()
+        {
+            leaderBoardPanel.SetActive(true);
         }
         public void MuteSound()
         {
