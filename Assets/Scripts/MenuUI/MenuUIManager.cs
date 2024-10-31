@@ -18,7 +18,10 @@ namespace MenuUI
         {
             SceneManager.LoadScene(1);
         }
-
+        public void OpenShop()
+        {
+            SceneManager.LoadScene("Shop");
+        }
         public void MuteSound()
         {
             var soundSp = soundSprite.GetComponent<Image>();
@@ -42,11 +45,6 @@ namespace MenuUI
 #endif
             Application.Quit();
             
-        }
-
-        public bool IsSoundMute()
-        {
-            return _isSoundMute;
         }
     }
 }
