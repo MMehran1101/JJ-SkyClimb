@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
             CheckHighScore();
         }
     }
-
     private void CheckHighScore()
     {
         if (_score > PlayerPrefs.GetInt("HighScore", 0))
