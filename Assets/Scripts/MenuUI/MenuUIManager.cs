@@ -1,5 +1,5 @@
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
 
@@ -9,27 +9,69 @@ namespace MenuUI
     {
         private bool _isSoundMute;
         public static MenuUIManager Instance;
-        [Header("Sound")]
-        [SerializeField] private GameObject soundSprite; 
-        [SerializeField] private Sprite unmuteSound; 
+        private Sequence jumpSequence;
+
+        [Header("Sound")] [SerializeField] private AudioClip jumpClip;
+        [SerializeField] private GameObject soundSprite;
+        [SerializeField] private Sprite unmuteSound;
         [SerializeField] private Sprite muteSound;
 
-        [Header("Panel")] 
-        [SerializeField] private GameObject leaderBoardPanel;
-        
+        [Header("Elements")] [SerializeField] private GameObject leaderBoardPanel;
+        [SerializeField] private RectTransform player;
+        [SerializeField] private float jumpDuration;
+        [SerializeField] private AnimationCurve playerEase;
+
+
+        private void Start()
+        {
+            DoodleJumping();
+        }
+
+        private void DoodleJumping()
+        {
+            if (player == null)
+            {
+                Debug.LogError("RectTransform is not assigned!");
+                return;
+            }
+
+            jumpSequence = DOTween.Sequence();
+            jumpSequence.Append(player.DOAnchorPosY(player.anchoredPosition.y + 500, jumpDuration)
+                .SetEase(playerEase));
+
+            jumpSequence.SetLoops(-1, LoopType.Yoyo)
+                .OnStepComplete(() =>
+                {
+                    if (jumpSequence.CompletedLoops() % 2 == 0)
+                    {
+                        SoundManager.Instance.PlaySound(jumpClip);
+                    }
+                });
+        }
+
+        private void OnDisable()
+        {
+            if (jumpSequence != null)
+            {
+                jumpSequence.Kill();
+            }
+        }
 
         public void PlayGame()
         {
             SceneManager.LoadScene(1);
         }
+
         public void OpenShop()
         {
             SceneManager.LoadScene("Shop");
         }
+
         public void OpenLeaderBoardPanel()
         {
             leaderBoardPanel.SetActive(true);
         }
+
         public void MuteSound()
         {
             var soundSp = soundSprite.GetComponent<Image>();
@@ -46,13 +88,13 @@ namespace MenuUI
                 SoundManager.Instance.MuteSound(true);
             }
         }
+
         public void ExitGame()
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
             Application.Quit();
-            
         }
     }
 }
