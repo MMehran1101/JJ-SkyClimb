@@ -6,18 +6,30 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private int _score;
+    private int coins;
     private BoxCollider2D _playerCollider;
     public static GameManager Instance;
     [SerializeField] private GameObject _player;
     [SerializeField] private AudioSource eventAudio;
     [SerializeField] private AudioClip gameOverClip;
-
+    
+    
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
     }
 
-    // Start is called before the first frame update
+    public void SetCoin(int newCoin)
+    {
+        coins += newCoin;
+        PlayerPrefs.SetInt("Coin",coins);
+        Debug.Log(newCoin+" Coin recived. and inventori is " + coins);
+        Debug.LogError("Total Coin: " + PlayerPrefs.GetInt("Coin",0));
+    }
+    public int GetCoin()
+    {
+        return coins;
+    }
     void Start()
     {
         _score = 0;
