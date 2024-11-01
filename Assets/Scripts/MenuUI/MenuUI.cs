@@ -5,10 +5,9 @@ using Image = UnityEngine.UI.Image;
 
 namespace MenuUI
 {
-    public class MenuUIManager : MonoBehaviour
+    public class MenuUI : MonoBehaviour
     {
         private bool _isSoundMute;
-        public static MenuUIManager Instance;
         private Sequence jumpSequence;
 
         [Header("Sound")] [SerializeField] private AudioClip jumpClip;
