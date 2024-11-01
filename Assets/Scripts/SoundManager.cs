@@ -38,4 +38,10 @@ public class SoundManager : MonoBehaviour
         var soundAudio = gameObject.GetComponent<AudioSource>();
         soundAudio.mute = isMute;
     }
+    public void MuteMusic(bool isMute)
+    {
+        var soundAudio = gameObject.GetComponent<AudioSource>();
+        soundAudio.mute = isMute;
+    }
+
 }
