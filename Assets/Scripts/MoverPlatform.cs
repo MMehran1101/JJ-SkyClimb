@@ -8,7 +8,7 @@ public class MoverPlatform : MonoBehaviour
     private float _currentVelocity;
     private float _jumpVelocity = 350;
     private Rigidbody2D _moverRb;
-    [SerializeField] private AudioSource jumpAudio;
+    [SerializeField] private AudioClip jumpAudio;
     
     private void Start()
     {
@@ -41,7 +41,7 @@ public class MoverPlatform : MonoBehaviour
         {
             if (_currentVelocity <= 0)
             {
-                jumpAudio.Play();
+                SoundManager.Instance.PlaySound(jumpAudio);
                 var playerRb = col.collider.GetComponent<Rigidbody2D>();
                 if (playerRb == null) return;
                 var playerVelocity = playerRb.velocity;

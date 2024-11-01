@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     private BoxCollider2D _playerCollider;
     public static GameManager Instance;
     [SerializeField] private GameObject _player;
-    [SerializeField] private AudioSource eventAudio;
     [SerializeField] private AudioClip gameOverClip;
     
     
@@ -60,8 +59,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         BoxCollider2D.Destroy(_playerCollider);
-        eventAudio.clip = gameOverClip;
-        eventAudio.Play();
+        SoundManager.Instance.PlaySound(gameOverClip);
         UIManager.Instance.EnableGameOverPanel();
     }
 }
