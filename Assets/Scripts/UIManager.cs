@@ -38,8 +38,7 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        GameManager.Instance.RestartGame();
     }
 
     public void SetTextScore(int score)
@@ -53,9 +52,9 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public void SetHighScoreText()
+    public void SetHighScoreText(int highScore)
     {
-        highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+        highScoreText.text = highScore.ToString();
     }
     
 }

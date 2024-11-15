@@ -1,14 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
+    public Transform playerTransform;
     private const float smoothTime = 0.2f;
     private Vector2 _currentVelocity;
 
+    private void Start()
+    {
+        GameObject player = GameManager.Instance.player.gameObject;
+        playerTransform = player.GetComponent<Transform>();
+    }
 
     private void LateUpdate()
     {

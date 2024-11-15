@@ -61,8 +61,8 @@ public class Player : MonoBehaviour
 
     private void CalculateScore()
     {
-        var s = transform.position.y * 100;
-        GameManager.Instance.UpdateScore((int) s);
+        var score = transform.position.y * 10;
+        GameManager.Instance.UpdateScore((int) score);
     }
     
 }

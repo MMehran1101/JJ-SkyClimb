@@ -1,7 +1,6 @@
-using System;
-using MenuUI;
-using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,51 +8,86 @@ public class GameManager : MonoBehaviour
     private int coins;
     private BoxCollider2D _playerCollider;
     public static GameManager Instance;
-    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject playerPrefab;
+    [HideInInspector] public GameObject player;
     [SerializeField] private AudioClip gameOverClip;
-    
-    
+
+
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SetCoin(int newCoin)
     {
         coins += newCoin;
-        PlayerPrefs.SetInt("Coin",coins);
-        Debug.Log(newCoin+" Coin recived. and inventori is " + coins);
-        Debug.LogError("Total Coin: " + PlayerPrefs.GetInt("Coin",0));
+        DataPersistence.SaveInt(DataPersistence.coinKey, coins);
     }
+
+    void OnEnable()
+    {
+        // ثبت رویداد برای بارگذاری صحنه جدید
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        // حذف رویداد
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("new scene : " + scene.name);
+        if (scene.name == "Main Game")
+        {
+            player = Instantiate(playerPrefab, new Vector3(0, 2), quaternion.identity);
+            _score = 0;
+            coins = 0;
+        }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public int GetCoin()
     {
         return coins;
     }
+
     void Start()
     {
-        _score = 0;
-        _playerCollider = _player.gameObject.GetComponent<BoxCollider2D>();
-        UIManager.Instance.SetTextScore(_score);
+        _playerCollider = playerPrefab.gameObject.GetComponent<BoxCollider2D>();
     }
-
 
     public void UpdateScore(int score)
     {
         if (score > _score)
         {
             _score = score;
-            UIManager.Instance.SetTextScore(_score);
             CheckHighScore();
         }
+        UIManager.Instance.SetTextScore(_score);
     }
+
     private void CheckHighScore()
     {
-        if (_score > PlayerPrefs.GetInt("HighScore", 0))
+        if (_score > DataPersistence.LoadInt(DataPersistence.highScoreKey, 0))
         {
-            PlayerPrefs.SetInt("HighScore", _score);
+            DataPersistence.SaveInt(DataPersistence.highScoreKey, _score);
+            UIManager.Instance.SetHighScoreText(_score);
         }
-
-        UIManager.Instance.SetHighScoreText();
     }
 
     public void GameOver()

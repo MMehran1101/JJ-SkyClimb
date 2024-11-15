@@ -25,18 +25,17 @@ public class SoundManager : MonoBehaviour
     {
         effectSource.PlayOneShot(clip);
     }
-
+    
+    public void MuteSound(bool isMute)
+    {
+        var soundAudio = gameObject.GetComponent<AudioSource>();
+        soundAudio.mute = isMute;
+    }
     public void PlayMusic(AudioClip clip, bool isLoop)
     {
         musicSource.PlayOneShot(clip);
         if (isLoop) musicSource.loop = true;
         else musicSource.loop = false;
-    }
-
-    public void MuteSound(bool isMute)
-    {
-        var soundAudio = gameObject.GetComponent<AudioSource>();
-        soundAudio.mute = isMute;
     }
     public void MuteMusic(bool isMute)
     {

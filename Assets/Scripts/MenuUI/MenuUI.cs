@@ -7,9 +7,8 @@ namespace MenuUI
 {
     public class MenuUI : MonoBehaviour
     {
-        private bool _isSoundMute;
         private Sequence jumpSequence;
-
+        private Image soundSp;
         [Header("Sound")] [SerializeField] private AudioClip jumpClip;
         [SerializeField] private GameObject soundSprite;
         [SerializeField] private Sprite unmuteSound;
@@ -23,7 +22,9 @@ namespace MenuUI
 
         private void Start()
         {
+            soundSp = soundSprite.GetComponent<Image>();
             DoodleJumping();
+            CheckSound();
         }
 
         private void DoodleJumping()
@@ -71,19 +72,32 @@ namespace MenuUI
             leaderBoardPanel.SetActive(true);
         }
 
-        public void MuteSound()
+        private void CheckSound()
         {
-            var soundSp = soundSprite.GetComponent<Image>();
-            if (_isSoundMute)
+            if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
+            {
+                soundSp.sprite = muteSound;
+                SoundManager.Instance.MuteSound(true);
+            }
+            else
             {
                 soundSp.sprite = unmuteSound;
-                _isSoundMute = false;
+                SoundManager.Instance.MuteSound(false);
+            }
+        }
+
+        public void ChangeSound()
+        {
+            if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
+            {
+                soundSp.sprite = unmuteSound;
+                DataPersistence.SaveInt(DataPersistence.soundKey, 1);
                 SoundManager.Instance.MuteSound(false);
             }
             else
             {
                 soundSp.sprite = muteSound;
-                _isSoundMute = true;
+                DataPersistence.SaveInt(DataPersistence.soundKey, 0);
                 SoundManager.Instance.MuteSound(true);
             }
         }
