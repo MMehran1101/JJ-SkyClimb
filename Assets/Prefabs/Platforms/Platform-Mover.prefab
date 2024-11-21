@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2800331463336662352}
   - component: {fileID: -3559907919211296673}
   - component: {fileID: 7392277785926525675}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform-Mover
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 3688855839783980137}
   - component: {fileID: 1912739966008115379}
   - component: {fileID: 1372408096896721486}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger
   m_TagString: Platform
   m_Icon: {fileID: 0}

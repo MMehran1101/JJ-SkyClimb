@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3477033114364054232}
   - component: {fileID: 3477033114364054233}
   - component: {fileID: 3477033114364052774}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform-Weak
   m_TagString: WeakPlatform
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 2714917704271893475}
   - component: {fileID: 871247853008445241}
   - component: {fileID: 403041893675351492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger
   m_TagString: Platform
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1373644889}
   - component: {fileID: 3660111836133845652}
   - component: {fileID: 5011322713844370914}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform-Normal
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 2821188662598759341}
   - component: {fileID: 1052989292687048567}
   - component: {fileID: 512380214531841418}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trigger
   m_TagString: Platform
   m_Icon: {fileID: 0}
