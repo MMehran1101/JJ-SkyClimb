@@ -2599,6 +2599,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalPlatform: {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  weakPlatform: {fileID: 4777023188797152690, guid: 2994ac7e09ed8fb42bbfb24fac2f3a6b, type: 3}
+  moverPlatform: {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
 --- !u!224 &1090493933
 RectTransform:
   m_ObjectHideFlags: 0

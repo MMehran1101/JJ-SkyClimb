@@ -80,7 +80,7 @@ public class SpawnTest : MonoBehaviour
 
         AddToHistory(nextPlatformType);
 
-        if (platformCount <= 100)
+        if (platformCount <= 200)
         {
             Invoke(nameof(SpawnPlatform), 0.1f);
         }

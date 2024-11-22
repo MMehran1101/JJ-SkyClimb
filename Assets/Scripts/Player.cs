@@ -3,26 +3,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float _movement;
-    private float _moveSpeed = 200;
-    private Rigidbody2D _playerRb;
+    private float moveSpeed = 5f;
     private SpriteRenderer _spriteRenderer;
+
+    private Vector3 lastTouchPos;
+    private Vector3 direction;
+    private Vector2 bounds;
 
     private void Start()
     {
-        _playerRb = gameObject.GetComponent<Rigidbody2D>();
+        bounds = ScreenUtils.GetWorldScreenSize();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
-
-    private void Update()
-    {
-        _movement = Input.GetAxis("Horizontal") * (_moveSpeed * Time.deltaTime);
-    }
-
     private void FixedUpdate()
     {
-        PlayerController();
-        CalculatePlayerVelocity();
+        PlayerControllerWithTuch();
         CheckXBounds();
     }
 
@@ -30,39 +25,75 @@ public class Player : MonoBehaviour
     {
         CalculateScore();
     }
-
-    private void CalculatePlayerVelocity()
+    
+    private void PlayerControllerWithTuch()
     {
-        var xVelocity = _playerRb.velocity;
-        xVelocity.x = _movement;
-        _playerRb.velocity = xVelocity;
-    }
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y,0));
+            touchPos.z = 0;
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    lastTouchPos.x = touchPos.x;
+                    break;
 
-    private void PlayerController()
-    {
-        // Flip sprite when character going left of right
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            _spriteRenderer.flipX = true;
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-            _spriteRenderer.flipX = false;
+                case TouchPhase.Moved:
+                    direction.x = (touchPos.x - lastTouchPos.x);
+
+                    float distance = Vector3.Distance(touchPos, lastTouchPos);
+                    float touchSpeed = distance / Time.deltaTime;
+
+                    float maxDistance = 10f; 
+                    distance = Mathf.Clamp(distance, 0, maxDistance);
+
+                    float maxSpeed = 10f; 
+                    touchSpeed = Mathf.Clamp(touchSpeed, 0, maxSpeed);
+
+                    transform.position += direction * (touchSpeed * moveSpeed * Time.deltaTime);
+                    
+                    // look player right or left sprite
+                    if (touchPos.x > lastTouchPos.x)
+                    {
+                        _spriteRenderer.flipX = false;
+                    }
+                    else if (touchPos.x < lastTouchPos.x)
+                    {
+                        _spriteRenderer.flipX = true;
+                    }
+
+                    lastTouchPos.x = touchPos.x;
+                    break;
+
+                case TouchPhase.Ended:
+                    direction = Vector3.zero;
+                    break;
+            }
+        }
     }
 
     private void CheckXBounds()
     {
+        // calculate phone screen size
+        var b = bounds.x / 2;
+
         var position = transform.position;
-        position = position.x switch
+        if (position.x > b)
         {
-            > 3 => new Vector2(-3.5f, position.y),
-            < -3.5f => new Vector2(3, position.y),
-            _ => position
-        };
+            position = new Vector2(-b, position.y);
+        }
+        else if (position.x < -b)
+        {
+            position = new Vector2(b, position.y);
+        }
+
         transform.position = position;
     }
 
     private void CalculateScore()
     {
         var score = transform.position.y * 10;
-        GameManager.Instance.UpdateScore((int) score);
+        GameManager.Instance.UpdateScore((int)score);
     }
-    
 }
