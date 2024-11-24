@@ -26,6 +26,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetGyro(bool t)
+    {
+        int data = t ? 1 : 0;
+        if (SystemInfo.supportsGyroscope)
+        {
+            Input.gyro.enabled = t;
+            DataPersistence.SaveInt(DataPersistence.isGyroKey, data);
+        }
+        else
+        {
+            Input.gyro.enabled = false;
+            //todo: if player device not support show a pop up and tell him.
+            Debug.LogWarning("Gyroscope is not supported on this device.");
+        }
+    }
+
     public void SetCoin(int newCoin)
     {
         coins += newCoin;
@@ -34,13 +50,11 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        // ثبت رویداد برای بارگذاری صحنه جدید
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnDisable()
     {
-        // حذف رویداد
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -78,12 +92,15 @@ public class GameManager : MonoBehaviour
             _score = score;
             CheckHighScore();
         }
+
         UIManager.Instance.SetTextScore(_score);
     }
 
     private void CheckHighScore()
     {
-        if (_score > DataPersistence.LoadInt(DataPersistence.highScoreKey, 0))
+        var highscore = DataPersistence.LoadInt(DataPersistence.highScoreKey, 0);
+
+        if (_score > highscore)
         {
             DataPersistence.SaveInt(DataPersistence.highScoreKey, _score);
             UIManager.Instance.SetHighScoreText(_score);

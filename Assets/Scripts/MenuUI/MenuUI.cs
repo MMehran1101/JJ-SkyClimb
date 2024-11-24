@@ -62,6 +62,16 @@ namespace MenuUI
             SceneManager.LoadScene(1);
         }
 
+        public void GyroBtn()
+        {
+            GameManager.Instance.SetGyro(true);
+        }
+
+        public void TouchMovementBtn()
+        {
+            GameManager.Instance.SetGyro(false);
+        }
+
         public void OpenShop()
         {
             SceneManager.LoadScene("Shop");
