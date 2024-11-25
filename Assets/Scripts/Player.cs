@@ -7,25 +7,23 @@ public class Player : MonoBehaviour
     float maxSpeed = 25f;
     float maxDistance = 10f;
 
-    
-    [SerializeField] private float moveSpeedInGyro = 1000;
-    [SerializeField] private float smoothTime = 1.5f;
+    // gyro properties
+    private float moveSpeedInGyro = 1000;
+    private float smoothTime = 1.5f;
 
-    
+
     private Action controlMethode;
-    
+
     private SpriteRenderer _spriteRenderer;
-    
+
     private Vector2 currentVelocity = Vector2.zero;
     private Vector2 bounds;
     private Vector3 lastTouchPos;
     private Vector3 direction;
+    private Camera m_Camera;
 
-    private void Start()
+    private void Awake()
     {
-        bounds = ScreenUtils.GetWorldScreenSize();
-        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
         int gyro = DataPersistence.LoadInt(DataPersistence.isGyroKey, 0);
         if (gyro == 0)
         {
@@ -35,6 +33,13 @@ public class Player : MonoBehaviour
         {
             controlMethode = PlayerControllerWithGyroscope;
         }
+    }
+
+    private void Start()
+    {
+        m_Camera = Camera.main;
+        bounds = ScreenUtils.GetWorldScreenSize();
+        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -49,6 +54,7 @@ public class Player : MonoBehaviour
         CalculateScore();
     }
 
+
     private void PlayerControllerWithGyroscope()
     {
         if (Input.gyro.enabled)
@@ -59,10 +65,7 @@ public class Player : MonoBehaviour
 
             Vector2 targetPosition = new Vector2(gyroInput * moveSpeedInGyro * Time.deltaTime, position.y);
 
-            if (position.x < targetPosition.x)
-                _spriteRenderer.flipX = false;
-            else if (position.x > targetPosition.x)
-                _spriteRenderer.flipX = true;
+            FlipSprite(_spriteRenderer, position.x, targetPosition.x, .2f);
 
             position = Vector2.SmoothDamp(position, targetPosition, ref currentVelocity, smoothTime);
             transform.position = position;
@@ -74,7 +77,7 @@ public class Player : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            Vector3 touchPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
+            Vector3 touchPos = m_Camera!.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
             touchPos.z = 0;
             switch (touch.phase)
             {
@@ -88,17 +91,12 @@ public class Player : MonoBehaviour
                     float distance = Vector3.Distance(touchPos, lastTouchPos);
                     float touchSpeed = distance / Time.deltaTime;
 
-                    distance = Mathf.Clamp(distance, 0, maxDistance);
-
+                    Mathf.Clamp(distance, 0, maxDistance);
                     touchSpeed = Mathf.Clamp(touchSpeed, 0, maxSpeed);
 
                     transform.position += direction * (touchSpeed * moveSpeed * Time.deltaTime);
 
-                    // look player right or left sprite
-                    if (touchPos.x > lastTouchPos.x)
-                        _spriteRenderer.flipX = false;
-                    else if (touchPos.x < lastTouchPos.x)
-                        _spriteRenderer.flipX = true;
+                    FlipSprite(_spriteRenderer, lastTouchPos.x, touchPos.x, 0);
 
                     lastTouchPos.x = touchPos.x;
                     break;
@@ -108,6 +106,15 @@ public class Player : MonoBehaviour
                     break;
             }
         }
+    }
+
+
+    private void FlipSprite(SpriteRenderer spriteR, float position, float nextPostition, float offset)
+    {
+        if (position + offset < nextPostition)
+            spriteR.flipX = false;
+        else if (position - offset > nextPostition)
+            spriteR.flipX = true;
     }
 
     private void CheckXBounds()
