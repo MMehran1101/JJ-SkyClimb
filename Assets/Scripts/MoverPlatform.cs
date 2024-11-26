@@ -9,7 +9,7 @@ public class MoverPlatform : MonoBehaviour
     private float _jumpVelocity = 350;
     private Rigidbody2D _moverRb;
     [SerializeField] private AudioClip jumpAudio;
-    
+
     private void Start()
     {
         _moverRb = gameObject.GetComponent<Rigidbody2D>();
@@ -19,6 +19,8 @@ public class MoverPlatform : MonoBehaviour
     private void Update()
     {
         AnimateMoving();
+        if (gameObject.transform.position.y < GameManager.Instance.GetCameraSize().y)
+            Destroy(gameObject, 1);
     }
 
     private void AnimateMoving()

@@ -74,7 +74,7 @@ namespace MenuUI
 
         public void OpenShop()
         {
-            SceneManager.LoadScene("Shop");
+            //Todo: Shop UI  *** Next Update ***
         }
 
         public void OpenLeaderBoardPanel()

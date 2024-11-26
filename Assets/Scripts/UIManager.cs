@@ -4,12 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Texts")]
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [Header("Texts")] [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI scoreTextOnGameOver;
     [SerializeField] private TextMeshProUGUI highScoreText;
-    [Header("Panels")]
-    [SerializeField] private GameObject gameOverPanel;
+    [Header("Panels")] [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject pausePanel;
     public static UIManager Instance;
 
@@ -47,14 +45,13 @@ public class UIManager : MonoBehaviour
         scoreTextOnGameOver.text = scoreText.text;
     }
 
-    public void EnableGameOverPanel()
-    {
-        gameOverPanel.SetActive(true);
-    }
-
     public void SetHighScoreText(int highScore)
     {
         highScoreText.text = highScore.ToString();
     }
-    
+
+    public void EnableGameOverPanel()
+    {
+        gameOverPanel.SetActive(true);
+    }
 }
