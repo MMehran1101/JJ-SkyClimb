@@ -1,4 +1,3 @@
-using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private int _score;
     private int coins;
-    
+
     private BoxCollider2D _playerCollider;
     public static GameManager Instance;
     [SerializeField] private GameObject playerPrefab;
@@ -15,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip gameOverClip;
     private bool isGameOver;
 
-    
+
     private void Awake()
     {
         if (Instance == null)
@@ -128,7 +127,7 @@ public class GameManager : MonoBehaviour
     {
         return Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
     }
-    
+
     public void GameOver()
     {
         isGameOver = true;

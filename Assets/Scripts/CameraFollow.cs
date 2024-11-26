@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (transform.position.y < playerTransform.position.y)
+        if (playerTransform != null && transform.position.y < playerTransform.position.y)
         {
             Vector2 newPos = new Vector2(transform.position.x, playerTransform.position.y);
             transform.position = Vector2.SmoothDamp(transform.position
