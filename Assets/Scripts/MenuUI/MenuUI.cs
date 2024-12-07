@@ -18,6 +18,7 @@ namespace MenuUI
         [Header("Elements")] [SerializeField] private GameObject leaderBoardPanel;
         [SerializeField] private RectTransform player;
         [SerializeField] private float jumpDuration;
+        [SerializeField] private float jumpHeight;
         [SerializeField] private AnimationCurve playerEase;
 
 
@@ -37,7 +38,7 @@ namespace MenuUI
             }
 
             jumpSequence = DOTween.Sequence();
-            jumpSequence.Append(player.DOAnchorPosY(player.anchoredPosition.y + 500, jumpDuration)
+            jumpSequence.Append(player.DOAnchorPosY(player.anchoredPosition.y + jumpHeight, jumpDuration)
                 .SetEase(playerEase));
 
             jumpSequence.SetLoops(-1, LoopType.Yoyo)

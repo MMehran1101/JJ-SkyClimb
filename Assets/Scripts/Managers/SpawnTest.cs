@@ -53,7 +53,7 @@ namespace Managers
 
             // Location spawn of platform
             _spawnPos.y += Random.Range(0f, .5f);
-            _spawnPos.x = Random.Range((-bounds.x / 2) + platformOffset, (bounds.x / 2) - platformOffset);
+            _spawnPos.x = Random.Range((-bounds.x / 2) + (platformOffset/2), (bounds.x / 2) - (platformOffset/2));
 
             switch (GameManager.Instance.GetScore())
             {

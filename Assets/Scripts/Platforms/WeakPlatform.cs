@@ -5,7 +5,6 @@ namespace Platforms
 {
     public class WeakPlatform : MonoBehaviour
     {
-        [SerializeField] private Sprite weakBrokenPlatform;
         private float _currentVelocity;
         [SerializeField] private AudioClip jumpAudio;
 
@@ -23,7 +22,6 @@ namespace Platforms
                 if (_currentVelocity <= 0)
                 {
                     SoundManager.Instance.PlaySound(jumpAudio);
-                    gameObject.GetComponent<SpriteRenderer>().sprite = weakBrokenPlatform;
                     gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
                 }
             }    }
