@@ -91,6 +91,10 @@ namespace Managers
             return coins;
         }
 
+        public int GetScore()
+        {
+            return _score;
+        }
         public void UpdateScore(int score)
         {
             if (score > _score)

@@ -3,7 +3,7 @@ using Managers;
 using UnityEngine;
 using Utilities;
 
-namespace Player
+namespace PlayerFL
 {
     public class Player : MonoBehaviour
     {

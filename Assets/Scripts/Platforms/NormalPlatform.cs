@@ -1,4 +1,6 @@
+using System;
 using Managers;
+using PowerUps;
 using UnityEngine;
 
 namespace Platforms
@@ -8,6 +10,12 @@ namespace Platforms
         private float _currentVelocity;
         private float _jumpVelocity = 350;
         [SerializeField] private AudioClip jumpAudio;
+        [SerializeField] private PowerUp[] PowerUpsPrefab;
+
+        private void Start()
+        {
+            
+        }
 
         private void Update()
         {

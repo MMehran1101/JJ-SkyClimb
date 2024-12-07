@@ -161,6 +161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpAudio: {fileID: 8300000, guid: ef4396f54a01e6f46806da4a142d38f8, type: 3}
+  PowerUpsPrefab:
+  - {fileID: 2659935592359369241, guid: b4b21a76141838a428b696c191f30a16, type: 3}
 --- !u!1 &5717616905498790804
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using Utilities;
@@ -12,8 +13,9 @@ namespace Managers
         {
             Easy,
             Medium,
-            Hard
+            Hard,
         }
+
         private enum PlatformType
         {
             Normal,
@@ -21,11 +23,12 @@ namespace Managers
             Mover
         }
 
-        [Header("Platform Settings")] 
-        [SerializeField] private GameObject normalPlatform;
+        [Header("Platform Settings")] [SerializeField]
+        private GameObject normalPlatform;
+
         [SerializeField] private GameObject weakPlatform;
         [SerializeField] private GameObject moverPlatform;
-    
+
         private List<PlatformType> spawnHistory = new List<PlatformType>();
 
         private Vector2 _spawnPos;
@@ -43,32 +46,6 @@ namespace Managers
         }
 
 
-        void Spawn()
-        {
-            platformCount = 50;
-            for (int i = 0; i <= platformCount;)
-            {
-                _spawnPos.y += Random.Range(0f, .5f);
-                _spawnPos.x = Random.Range((-bounds.x / 2) + platformOffset, (bounds.x / 2) - platformOffset);
-                if (CheckObjectExist(_spawnPos, DifficultSettings(DifficultState.Easy)
-                        , LayerMask.GetMask("Platform")))
-                {
-                    Instantiate(normalPlatform, _spawnPos, quaternion.identity);
-                    i++;
-                }
-            }
-
-            for (int i = 0; i <= platformCount; i++)
-            {
-                _spawnPos.y += Random.Range(0f, 1f);
-                if (CheckObjectExist(_spawnPos, DifficultSettings(DifficultState.Medium)
-                        , LayerMask.GetMask("Platform")))
-                {
-                    Instantiate(normalPlatform, _spawnPos, quaternion.identity);
-                    i++;
-                }
-            }
-        }
         void SpawnPlatform()
         {
             PlatformType nextPlatformType = GetNextPlatformType();
@@ -77,32 +54,75 @@ namespace Managers
             // Location spawn of platform
             _spawnPos.y += Random.Range(0f, .5f);
             _spawnPos.x = Random.Range((-bounds.x / 2) + platformOffset, (bounds.x / 2) - platformOffset);
-        
-            if (CheckObjectExist(_spawnPos, DifficultSettings(DifficultState.Easy)
-                    , LayerMask.GetMask("Platform")))
+
+            switch (GameManager.Instance.GetScore())
             {
-                Instantiate(platformPrefab, _spawnPos, quaternion.identity);
-                platformCount += 1;
+                case < 500:
+                    if (CheckObjectExist(_spawnPos, DifficultSettings(DifficultState.Easy)
+                            , LayerMask.GetMask("Platform")))
+                    {
+                        Instantiate(platformPrefab, _spawnPos, quaternion.identity);
+                        platformCount += 1;
+                    }
+
+                    break;
+                case > 500 and < 1500:
+                    if (CheckObjectExist(_spawnPos, DifficultSettings(DifficultState.Medium)
+                            , LayerMask.GetMask("Platform")))
+                    {
+                        Instantiate(platformPrefab, _spawnPos, quaternion.identity);
+                        platformCount += 1;
+                    }
+
+                    break;
+
+                case > 1500:
+                    if (CheckObjectExist(_spawnPos, DifficultSettings(DifficultState.Hard)
+                            , LayerMask.GetMask("Platform")))
+                    {
+                        Instantiate(platformPrefab, _spawnPos, quaternion.identity);
+                        platformCount += 1;
+                    }
+
+                    break;
             }
+
 
             AddToHistory(nextPlatformType);
 
-            if (platformCount <= 200)
+            if (platformCount <= 500)
             {
-                Invoke(nameof(SpawnPlatform), 0.1f);
+                Invoke(nameof(SpawnPlatform), .1f);
             }
         }
 
         PlatformType GetNextPlatformType()
         {
-            PlatformType nextType;
-            do
-            {
-                nextType = (PlatformType)Random.Range(0, 3);
-            } 
-            while (nextType == PlatformType.Weak && CountInHistory(PlatformType.Weak) >= 1);
+            // do
+            // {
+            //     nextType = (PlatformType)Random.Range(0, 3);
+            // } 
+            // while (nextType == PlatformType.Weak && CountInHistory(PlatformType.Weak) >= 1);
 
-            return nextType;
+            var a = Random.Range(1, 10);
+            int[] normalP = { 1, 3, 8, 5, 7, 9 };
+            int[] weakP = { 2, 4 };
+            int[] moverP = { 6 };
+
+            if (normalP.Contains(a))
+            {
+                return PlatformType.Normal;
+            }
+            else if (weakP.Contains(a) && CountInHistory(PlatformType.Weak) <= 1)
+            {
+                return PlatformType.Weak;
+            }
+            else if (moverP.Contains(a))
+            {
+                return PlatformType.Mover;
+            }
+
+            return PlatformType.Normal;
         }
 
         GameObject GetPlatformPrefab(PlatformType type)
@@ -136,9 +156,9 @@ namespace Managers
             {
                 if (t == type) count++;
             }
+
             return count;
         }
-
 
 
         private float DifficultSettings(DifficultState state)
