@@ -15,9 +15,6 @@ namespace PlayerFL
         private float moveSpeedInGyro = 1000;
         private float smoothTime = 1.5f;
 
-
-        private Action controlMethode;
-
         private SpriteRenderer _spriteRenderer;
 
         private Vector2 currentVelocity = Vector2.zero;
@@ -26,21 +23,12 @@ namespace PlayerFL
         private Vector3 direction;
         private Camera m_Camera;
 
-        private void Awake()
-        {
-            int gyro = DataPersistence.LoadInt(DataPersistence.isGyroKey, 0);
-            if (gyro == 0)
-            {
-                controlMethode = PlayerControllerWithTuch;
-            }
-            else if (gyro == 1)
-            {
-                controlMethode = PlayerControllerWithGyroscope;
-            }
-        }
 
         private void Start()
         {
+            Input.gyro.enabled = true;
+
+            
             m_Camera = Camera.main;
             bounds = ScreenUtils.GetWorldScreenSize();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -48,8 +36,7 @@ namespace PlayerFL
 
         private void FixedUpdate()
         {
-            controlMethode?.Invoke();
-
+            PlayerControllerWithGyroscope();
             CheckXBounds();
         }
 
@@ -58,9 +45,9 @@ namespace PlayerFL
             CalculateScore();
         }
 
-
         private void PlayerControllerWithGyroscope()
         {
+            
             if (Input.gyro.enabled)
             {
                 float gyroInput = Input.acceleration.x;
@@ -76,7 +63,7 @@ namespace PlayerFL
             }
         }
 
-        private void PlayerControllerWithTuch()
+        /*private void PlayerControllerWithTuch()
         {
             if (Input.touchCount > 0)
             {
@@ -111,7 +98,7 @@ namespace PlayerFL
                 }
             }
         }
-
+*/
 
         private void FlipSprite(SpriteRenderer spriteR, float position, float nextPostition, float offset)
         {

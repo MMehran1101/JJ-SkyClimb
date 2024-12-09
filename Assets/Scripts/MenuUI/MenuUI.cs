@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Image = UnityEngine.UI.Image;
@@ -10,6 +11,15 @@ namespace MenuUI
     {
         private Sequence jumpSequence;
         private Image soundSp;
+        
+        [Header("Settings Panel")]
+        [SerializeField] private GameObject settingsPanel;
+        
+        [Header("Texts")]
+        [SerializeField] private TextMeshProUGUI highScoreText;
+        [SerializeField] private TextMeshProUGUI coinText;
+
+
         [Header("Sound")] [SerializeField] private AudioClip jumpClip;
         [SerializeField] private GameObject soundSprite;
         [SerializeField] private Sprite unmuteSound;
@@ -27,8 +37,14 @@ namespace MenuUI
             soundSp = soundSprite.GetComponent<Image>();
             DoodleJumping();
             CheckSound();
+            SetTexts();
         }
 
+        private void SetTexts()
+        {
+            coinText.text = DataPersistence.LoadInt(DataPersistence.coinKey, 0).ToString();
+            highScoreText.text = DataPersistence.LoadInt(DataPersistence.highScoreKey, 0).ToString();
+        }
         private void DoodleJumping()
         {
             if (player == null)
@@ -73,15 +89,15 @@ namespace MenuUI
         {
             GameManager.Instance.SetGyro(false);
         }
-
+        
         public void OpenShop()
         {
-            //Todo: Shop UI  *** Next Update ***
+            //Todo: Shop Section 
         }
 
         public void OpenLeaderBoardPanel()
         {
-            leaderBoardPanel.SetActive(true);
+            //Todo: LeaderBoard Panel
         }
 
         private void CheckSound()
@@ -114,6 +130,14 @@ namespace MenuUI
             }
         }
 
+        public void OpenSettings()
+        {
+            settingsPanel.SetActive(true);
+        }
+        public void CloseSettings()
+        {
+            settingsPanel.SetActive(false);
+        }
         public void ExitGame()
         {
 #if UNITY_EDITOR

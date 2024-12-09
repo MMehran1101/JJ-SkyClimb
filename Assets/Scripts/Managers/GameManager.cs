@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,13 +9,13 @@ namespace Managers
     {
         private int _score;
         private int coins;
-
+        
         private BoxCollider2D _playerCollider;
         public static GameManager Instance;
         [SerializeField] private GameObject playerPrefab;
         [HideInInspector] public GameObject player;
         [SerializeField] private AudioClip gameOverClip;
-        private bool isGameOver;
+        private bool isGameOver = false;
 
 
         private void Awake()

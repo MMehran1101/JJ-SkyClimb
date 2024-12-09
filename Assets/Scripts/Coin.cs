@@ -31,7 +31,7 @@ public class Coin : MonoBehaviour
     {
         if (col.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            GameManager.Instance.SetCoin(10);
+            GameManager.Instance.SetCoin(1);
             Destroy(gameObject);
         }
     }
