@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] private Sprite[] coinSprites;
     [SerializeField] private float frameDuration = 0.1f;
-
+    private Sequence coinSequence;
     private SpriteRenderer spriteRenderer;
 
     void Start()
@@ -17,21 +17,26 @@ public class Coin : MonoBehaviour
 
     private void AnimateCoin()
     {
-        Sequence coinSequence = DOTween.Sequence();
-        
+        coinSequence = DOTween.Sequence();
+
         foreach (var sprite in coinSprites)
         {
-            coinSequence.AppendCallback(() => spriteRenderer.sprite = sprite)
-                .AppendInterval(frameDuration);
+            if (spriteRenderer)
+            {
+                coinSequence.AppendCallback(() => spriteRenderer.sprite = sprite)
+                    .AppendInterval(frameDuration);
+            }
         }
-        
+
         coinSequence.SetLoops(-1);
     }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             GameManager.Instance.SetCoin(2);
+            coinSequence.Kill();
             Destroy(gameObject);
         }
     }

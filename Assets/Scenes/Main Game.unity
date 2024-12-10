@@ -2033,8 +2033,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 148257048}
   scoreTextOnGameOver: {fileID: 1456982233}
-  coinText: {fileID: 160620442}
   highScoreText: {fileID: 1160624227}
+  coinText: {fileID: 160620442}
   gameOverPanel: {fileID: 887645263}
   pausePanel: {fileID: 700561234}
 --- !u!1 &1160624225
@@ -3223,7 +3223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6281481503498892160, guid: abbc43c7a2850704c93dcd7696e89194, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.79
+      value: 4.03
       objectReference: {fileID: 0}
     - target: {fileID: 6281481503498892160, guid: abbc43c7a2850704c93dcd7696e89194, type: 3}
       propertyPath: m_LocalPosition.z
