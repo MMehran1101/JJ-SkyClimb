@@ -40,11 +40,6 @@ namespace PlayerFL
             CheckXBounds();
         }
 
-        private void LateUpdate()
-        {
-            CalculateScore();
-        }
-
         private void PlayerControllerWithGyroscope()
         {
             
@@ -125,11 +120,6 @@ namespace PlayerFL
 
             transform.position = position;
         }
-
-        private void CalculateScore()
-        {
-            var score = transform.position.y * 10;
-            GameManager.Instance.UpdateScore((int)score);
-        }
+        
     }
 }

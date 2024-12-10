@@ -8,7 +8,7 @@ namespace Managers
     public class GameManager : MonoBehaviour
     {
         private int _score;
-        private int coins;
+        private int _coins;
         
         private BoxCollider2D _playerCollider;
         public static GameManager Instance;
@@ -54,8 +54,7 @@ namespace Managers
 
         public void SetCoin(int newCoin)
         {
-            coins += newCoin;
-            DataPersistence.SaveInt(DataPersistence.coinKey, coins);
+            _coins += newCoin;
         }
 
         void OnEnable()
@@ -77,7 +76,7 @@ namespace Managers
                 _playerCollider = player.GetComponent<BoxCollider2D>();
                 isGameOver = false;
                 _score = 0;
-                coins = 0;
+                _coins = 0;
             }
         }
 
@@ -87,36 +86,39 @@ namespace Managers
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        public int GetCoin()
-        {
-            return coins;
-        }
-
         public int GetScore()
         {
             return _score;
         }
-        public void UpdateScore(int score)
-        {
-            if (score > _score)
-            {
-                _score = score;
-            }
 
-            UIManager.Instance.SetTextScore(_score);
+        public int GetCoins()
+        {
+            return _coins;
         }
 
-        private void CheckHighScore()
+        public int UpdateScore()
+        {
+            var score = player.transform.position.y * 10;
+            
+            if (score > _score)
+            {
+                _score = (int)score;
+            }
+
+            return _score;
+        }
+
+        public int CheckHighScore()
         {
             var highscore = DataPersistence.LoadInt(DataPersistence.highScoreKey, 0);
 
             if (_score > highscore)
             {
-                UIManager.Instance.SetHighScoreText(_score);
                 DataPersistence.SaveInt(DataPersistence.highScoreKey, _score);
+                return _score;
             }
             else
-                UIManager.Instance.SetHighScoreText(highscore);
+                return highscore;
         }
 
         private void PlayerOnScreen()
@@ -140,7 +142,12 @@ namespace Managers
             isGameOver = true;
             _playerCollider.isTrigger = true;
 
-            CheckHighScore();
+            //CheckHighScore();
+            
+            // add cions collected
+            int totalCoin = DataPersistence.LoadInt(DataPersistence.coinKey,0);
+            totalCoin += _coins;
+            DataPersistence.SaveInt(DataPersistence.coinKey, totalCoin);
 
             SoundManager.Instance.PlaySound(gameOverClip);
             UIManager.Instance.EnableGameOverPanel();
