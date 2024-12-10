@@ -1,4 +1,4 @@
-using System;
+using Utilities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +9,7 @@ namespace Managers
     {
         private int _score;
         private int _coins;
-        
+
         private BoxCollider2D _playerCollider;
         public static GameManager Instance;
         [SerializeField] private GameObject playerPrefab;
@@ -36,27 +36,6 @@ namespace Managers
             PlayerOnScreen();
         }
 
-        public void SetGyro(bool t)
-        {
-            int data = t ? 1 : 0;
-            if (SystemInfo.supportsGyroscope)
-            {
-                Input.gyro.enabled = t;
-                DataPersistence.SaveInt(DataPersistence.isGyroKey, data);
-            }
-            else
-            {
-                Input.gyro.enabled = false;
-                //todo: if player device not support show a pop up and tell him.
-                Debug.LogWarning("Gyroscope is not supported on this device.");
-            }
-        }
-
-        public void SetCoin(int newCoin)
-        {
-            _coins += newCoin;
-        }
-
         void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -80,26 +59,24 @@ namespace Managers
             }
         }
 
-        public void RestartGame()
+        private void PlayerOnScreen()
         {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (player != null && !isGameOver)
+            {
+                if (player.transform.position.y < ScreenUtils.GetCameraSize().y)
+                {
+                    GameOver();
+                }
+            }
         }
 
-        public int GetScore()
-        {
-            return _score;
-        }
 
-        public int GetCoins()
-        {
-            return _coins;
-        }
+        #region Score and Coins
 
         public int UpdateScore()
         {
             var score = player.transform.position.y * 10;
-            
+
             if (score > _score)
             {
                 _score = (int)score;
@@ -121,20 +98,28 @@ namespace Managers
                 return highscore;
         }
 
-        private void PlayerOnScreen()
+        public int GetScore()
         {
-            if (player != null && !isGameOver)
-            {
-                if (player.transform.position.y < GetCameraSize().y)
-                {
-                    GameOver();
-                }
-            }
+            return _score;
         }
 
-        public Vector3 GetCameraSize()
+        public void SetCoin(int newCoin)
         {
-            return Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
+            _coins += newCoin;
+        }
+
+        public int GetCoins()
+        {
+            return _coins;
+        }
+
+        #endregion
+
+
+        public void RestartGame()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void GameOver()
@@ -142,10 +127,8 @@ namespace Managers
             isGameOver = true;
             _playerCollider.isTrigger = true;
 
-            //CheckHighScore();
-            
             // add cions collected
-            int totalCoin = DataPersistence.LoadInt(DataPersistence.coinKey,0);
+            int totalCoin = DataPersistence.LoadInt(DataPersistence.coinKey, 0);
             totalCoin += _coins;
             DataPersistence.SaveInt(DataPersistence.coinKey, totalCoin);
 

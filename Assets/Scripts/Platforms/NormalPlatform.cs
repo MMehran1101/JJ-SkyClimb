@@ -1,7 +1,7 @@
-using System;
 using Managers;
 using PowerUps;
 using UnityEngine;
+using Utilities;
 
 namespace Platforms
 {
@@ -11,15 +11,10 @@ namespace Platforms
         private float _jumpVelocity = 350;
         [SerializeField] private AudioClip jumpAudio;
         [SerializeField] private PowerUp[] PowerUpsPrefab;
-
-        private void Start()
-        {
-            
-        }
-
+        
         private void Update()
         {
-            if(gameObject.transform.position.y < GameManager.Instance.GetCameraSize().y)
+            if(gameObject.transform.position.y < ScreenUtils.GetCameraSize().y)
                 Destroy(gameObject,1);
         }
     

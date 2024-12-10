@@ -11,12 +11,11 @@ namespace MenuUI
     {
         private Sequence jumpSequence;
         private Image soundSp;
-        
-        [Header("Settings Panel")]
-        [SerializeField] private GameObject settingsPanel;
-        
-        [Header("Texts")]
-        [SerializeField] private TextMeshProUGUI highScoreText;
+
+        [Header("Settings Panel")] [SerializeField]
+        private GameObject settingsPanel;
+
+        [Header("Texts")] [SerializeField] private TextMeshProUGUI highScoreText;
         [SerializeField] private TextMeshProUGUI coinText;
 
 
@@ -35,9 +34,17 @@ namespace MenuUI
         private void Start()
         {
             soundSp = soundSprite.GetComponent<Image>();
-            DoodleJumping();
+            PlayerJumping();
             CheckSound();
             SetTexts();
+        }
+
+        private void OnDisable()
+        {
+            if (jumpSequence != null)
+            {
+                jumpSequence.Kill();
+            }
         }
 
         private void SetTexts()
@@ -45,7 +52,8 @@ namespace MenuUI
             coinText.text = DataPersistence.LoadInt(DataPersistence.coinKey, 0).ToString();
             highScoreText.text = DataPersistence.LoadInt(DataPersistence.highScoreKey, 0).ToString();
         }
-        private void DoodleJumping()
+
+        private void PlayerJumping()
         {
             if (player == null)
             {
@@ -67,29 +75,11 @@ namespace MenuUI
                 });
         }
 
-        private void OnDisable()
-        {
-            if (jumpSequence != null)
-            {
-                jumpSequence.Kill();
-            }
-        }
-
         public void PlayGame()
         {
             SceneManager.LoadScene(1);
         }
 
-        public void GyroBtn()
-        {
-            GameManager.Instance.SetGyro(true);
-        }
-
-        public void TouchMovementBtn()
-        {
-            GameManager.Instance.SetGyro(false);
-        }
-        
         public void OpenShop()
         {
             //Todo: Shop Section 
@@ -98,6 +88,16 @@ namespace MenuUI
         public void OpenLeaderBoardPanel()
         {
             //Todo: LeaderBoard Panel
+        }
+
+        public void OpenSettings()
+        {
+            settingsPanel.SetActive(true);
+        }
+
+        public void CloseSettings()
+        {
+            settingsPanel.SetActive(false);
         }
 
         private void CheckSound()
@@ -130,14 +130,6 @@ namespace MenuUI
             }
         }
 
-        public void OpenSettings()
-        {
-            settingsPanel.SetActive(true);
-        }
-        public void CloseSettings()
-        {
-            settingsPanel.SetActive(false);
-        }
         public void ExitGame()
         {
 #if UNITY_EDITOR

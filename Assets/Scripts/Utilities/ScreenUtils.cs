@@ -14,7 +14,11 @@ namespace Utilities
             return new Vector2(width, height);
         }
     
-
+        public static Vector3 GetCameraSize()
+        {
+            return Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
+        }
+        
         public static Vector2 GetPixelScreenSize()
         {
             return new Vector2(Screen.width, Screen.height);

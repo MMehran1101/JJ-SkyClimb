@@ -1,5 +1,6 @@
 using Managers;
 using UnityEngine;
+using Utilities;
 
 namespace Platforms
 {
@@ -10,7 +11,7 @@ namespace Platforms
 
         private void Update()
         {
-            if(gameObject.transform.position.y < GameManager.Instance.GetCameraSize().y)
+            if(gameObject.transform.position.y < ScreenUtils.GetCameraSize().y)
                 Destroy(gameObject,1);
         }
 

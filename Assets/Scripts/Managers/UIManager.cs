@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,9 +9,11 @@ namespace Managers
         [Header("Texts")] 
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI scoreTextOnGameOver;
-        [SerializeField] private TextMeshProUGUI coinText;
         [SerializeField] private TextMeshProUGUI highScoreText;
-        [Header("Panels")] [SerializeField] private GameObject gameOverPanel;
+        [SerializeField] private TextMeshProUGUI coinText;
+        
+        [Header("Panels")]
+        [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject pausePanel;
         public static UIManager Instance;
 
@@ -27,6 +28,8 @@ namespace Managers
             SetScoreText(GameManager.Instance.UpdateScore());
             SetHighScoreText(GameManager.Instance.CheckHighScore());
         }
+
+        #region Buttons
 
         public void PauseGame()
         {
@@ -51,6 +54,10 @@ namespace Managers
             GameManager.Instance.RestartGame();
         }
 
+        #endregion
+        
+        #region Texts Elements
+
         private void SetScoreText(int score)
         {
             scoreText.text = score.ToString();
@@ -67,6 +74,8 @@ namespace Managers
             coinText.text = coins.ToString();
         }
 
+        #endregion
+        
         public void EnableGameOverPanel()
         {
             gameOverPanel.SetActive(true);
