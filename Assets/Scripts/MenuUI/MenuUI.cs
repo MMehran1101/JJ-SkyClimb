@@ -135,7 +135,7 @@ namespace MenuUI
         {
             soundSp = soundSprite.GetComponent<Image>();
             vibrationSp = vibrationSprite.GetComponent<Image>();
-            sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 3000);
+            sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 2000);
             
             // Sound Data
             if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
