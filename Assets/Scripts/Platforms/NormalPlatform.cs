@@ -1,5 +1,7 @@
+using System;
 using Managers;
 using PowerUps;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 
@@ -11,7 +13,7 @@ namespace Platforms
         private float _jumpVelocity = 350;
         [SerializeField] private AudioClip jumpAudio;
         [SerializeField] private PowerUp[] PowerUpsPrefab;
-        
+
         private void Update()
         {
             if(gameObject.transform.position.y < ScreenUtils.GetCameraSize().y)
@@ -26,6 +28,7 @@ namespace Platforms
                 if (_currentVelocity <= 0)
                 {
                     SoundManager.Instance.PlaySound(jumpAudio);
+
                     var playerRb = col.collider.GetComponent<Rigidbody2D>();
                     if (playerRb == null) return;
                     var playerVelocity = playerRb.velocity;

@@ -45,6 +45,7 @@ namespace Platforms
                 if (_currentVelocity <= 0)
                 {
                     SoundManager.Instance.PlaySound(jumpAudio);
+                    
                     var playerRb = col.collider.GetComponent<Rigidbody2D>();
                     if (playerRb == null) return;
                     var playerVelocity = playerRb.velocity;

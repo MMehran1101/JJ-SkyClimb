@@ -1,3 +1,4 @@
+using System;
 using Utilities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -9,14 +10,14 @@ namespace Managers
     {
         private int _score;
         private int _coins;
+        private bool isGameOver = false;
 
         private BoxCollider2D _playerCollider;
         public static GameManager Instance;
         [SerializeField] private GameObject playerPrefab;
         [HideInInspector] public GameObject player;
         [SerializeField] private AudioClip gameOverClip;
-        private bool isGameOver = false;
-
+        
 
         private void Awake()
         {
@@ -70,6 +71,19 @@ namespace Managers
             }
         }
 
+        public bool ReturnVibrationStatus()
+        {
+            var vibrate = DataPersistence.LoadInt(DataPersistence.vibrationKey, 1);
+            if (vibrate == 0)
+            {
+                return false;
+            }
+            else 
+            {
+                return true;
+            }
+        }
+        
 
         #region Score and Coins
 
@@ -126,7 +140,8 @@ namespace Managers
         {
             isGameOver = true;
             _playerCollider.isTrigger = true;
-
+            if(ReturnVibrationStatus()) Vibration.Vibrate(500);
+            
             // add cions collected
             int totalCoin = DataPersistence.LoadInt(DataPersistence.coinKey, 0);
             totalCoin += _coins;

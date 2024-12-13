@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Utilities;
 using Image = UnityEngine.UI.Image;
 
 namespace MenuUI
@@ -14,6 +15,7 @@ namespace MenuUI
     {
         private Sequence jumpSequence;
         private Image soundSp;
+        private Image vibrationSp;
 
         [Header("Panels")] [SerializeField] private GameObject settingsPanel;
         [SerializeField] private GameObject shopPanel;
@@ -26,8 +28,8 @@ namespace MenuUI
 
         [Header("Sound")] [SerializeField] private AudioClip jumpClip;
         [SerializeField] private GameObject soundSprite;
-        [SerializeField] private Sprite unmuteSound;
-        [SerializeField] private Sprite muteSound;
+        [SerializeField] private Sprite onSprite;
+        [SerializeField] private Sprite offSprite;
 
         [Header("Elements")] 
         [SerializeField] private RectTransform player;
@@ -35,14 +37,15 @@ namespace MenuUI
         [SerializeField] private float jumpHeight;
         [SerializeField] private AnimationCurve playerEase;
         [SerializeField] private Slider sensetiveSlider;
+        [SerializeField] private GameObject vibrationSprite;
+
 
 
         private void Start()
         {
-            soundSp = soundSprite.GetComponent<Image>();
-            sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 3000);
+            
             PlayerJumping();
-            CheckSound();
+            LoadSettingsData();
             SetTexts();
         }
 
@@ -110,6 +113,7 @@ namespace MenuUI
         public void OpenSettings()
         {
             settingsPanel.SetActive(true);
+
         }
 
         public void CloseSettings()
@@ -127,36 +131,64 @@ namespace MenuUI
             sensetiveSlider.value -= 1000;
             DataPersistence.SaveInt(DataPersistence.gyroSensetiveKey,(int)sensetiveSlider.value);
         }
-        private void CheckSound()
+        private void LoadSettingsData()
         {
+            soundSp = soundSprite.GetComponent<Image>();
+            vibrationSp = vibrationSprite.GetComponent<Image>();
+            sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 3000);
+            
+            // Sound Data
             if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
             {
-                soundSp.sprite = muteSound;
+                soundSp.sprite = offSprite;
                 SoundManager.Instance.MuteSound(true);
             }
             else
             {
-                soundSp.sprite = unmuteSound;
+                soundSp.sprite = onSprite;
                 SoundManager.Instance.MuteSound(false);
+            }
+            
+            // Vibration Data
+            if (DataPersistence.LoadInt(DataPersistence.vibrationKey, 1) == 0)
+            {
+                vibrationSp.sprite = offSprite;
+            }
+            else
+            {
+                vibrationSp.sprite = onSprite;
             }
         }
 
-        public void ChangeSound()
+        public void OnClickSound()
         {
             if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
             {
-                soundSp.sprite = unmuteSound;
+                soundSp.sprite = onSprite;
                 DataPersistence.SaveInt(DataPersistence.soundKey, 1);
                 SoundManager.Instance.MuteSound(false);
             }
             else
             {
-                soundSp.sprite = muteSound;
+                soundSp.sprite = offSprite;
                 DataPersistence.SaveInt(DataPersistence.soundKey, 0);
                 SoundManager.Instance.MuteSound(true);
             }
         }
 
+        public void OnClickVibration()
+        {
+            if (DataPersistence.LoadInt(DataPersistence.vibrationKey, 1) == 0)
+            {
+                vibrationSp.sprite = onSprite;
+                DataPersistence.SaveInt(DataPersistence.vibrationKey, 1);
+            }
+            else
+            {
+                vibrationSp.sprite = offSprite;
+                DataPersistence.SaveInt(DataPersistence.vibrationKey, 0);
+            }
+        }
         public void ExitAppPanel()
         {
             exitAppPanel.SetActive(true);

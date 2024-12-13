@@ -8,7 +8,14 @@ namespace Platforms
     {
         private float _currentVelocity;
         [SerializeField] private AudioClip jumpAudio;
+        private bool isVibrate;
 
+        private void Start()
+        {
+            if (GameManager.Instance.ReturnVibrationStatus())
+                isVibrate = true;
+        }
+        
         private void Update()
         {
             if(gameObject.transform.position.y < ScreenUtils.GetCameraSize().y)
@@ -23,7 +30,9 @@ namespace Platforms
                 if (_currentVelocity <= 0)
                 {
                     SoundManager.Instance.PlaySound(jumpAudio);
-                    gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
+                    if (isVibrate) Vibration.Vibrate(100);
+
+                    gameObject.GetComponent<Rigidbody2D>().gravityScale = 5;
                 }
             }    }
     }
