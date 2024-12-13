@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2666233, y: 0.2666233, z: 0.2666233}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 814706063
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 362393442, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2deaab179ff51c948a599c31443f6ea9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 1.36, y: 1.37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -146,18 +146,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0036892295, y: 0.003980398}
+  m_Offset: {x: -0.0029087663, y: 0.0013412386}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1.36, y: 1.37}
+    newSize: {x: 1.36, y: 1.37}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.51019084, y: 0.5040841}
+  m_Size: {x: 0.5550568, y: 0.56214595}
   m_EdgeRadius: 0
 --- !u!114 &8434923967985290290
 MonoBehaviour:
@@ -172,12 +172,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinSprites:
-  - {fileID: 362393442, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
-  - {fileID: 1048476693, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
-  - {fileID: 1677444486, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
-  - {fileID: 860611428, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
-  - {fileID: 62449094, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
-  - {fileID: -2109500111, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
-  - {fileID: 626270502, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
-  - {fileID: 713414883, guid: f0741fcc59fa76a4f99d60f7840966cd, type: 3}
+  - {fileID: 21300000, guid: 2deaab179ff51c948a599c31443f6ea9, type: 3}
+  - {fileID: 21300000, guid: 386e3707612fcc2468e2b3f981f5e1bb, type: 3}
+  - {fileID: 21300000, guid: d8e8e71a9552f6e4c80553cc940cc20a, type: 3}
+  - {fileID: 21300000, guid: 7fbc6e0c7c6db90498ddfe408d4c9f68, type: 3}
+  - {fileID: 21300000, guid: d5409cb74244117439013be7c3d2c2a1, type: 3}
+  - {fileID: 21300000, guid: 32963a0d1cf411c48b4eb90731bae0ef, type: 3}
+  - {fileID: 21300000, guid: f30089b1d181e4c4b8f78b4deaabb4fd, type: 3}
+  - {fileID: 21300000, guid: 29f2fe267d10eae41b348788a96d0706, type: 3}
+  - {fileID: 21300000, guid: 6cf0d045d649c734b90888e82b1a0fb4, type: 3}
+  - {fileID: 21300000, guid: 17deef8e39ca2a44b83954b3bd749da9, type: 3}
   frameDuration: 0.1

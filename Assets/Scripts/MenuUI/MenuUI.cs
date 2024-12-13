@@ -1,8 +1,11 @@
+using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 
 namespace MenuUI
@@ -12,8 +15,10 @@ namespace MenuUI
         private Sequence jumpSequence;
         private Image soundSp;
 
-        [Header("Settings Panel")] [SerializeField]
-        private GameObject settingsPanel;
+        [Header("Panels")] [SerializeField] private GameObject settingsPanel;
+        [SerializeField] private GameObject shopPanel;
+        [SerializeField] private GameObject leaderBoardPanel;
+        [SerializeField] private GameObject exitAppPanel;
 
         [Header("Texts")] [SerializeField] private TextMeshProUGUI highScoreText;
         [SerializeField] private TextMeshProUGUI coinText;
@@ -24,8 +29,7 @@ namespace MenuUI
         [SerializeField] private Sprite unmuteSound;
         [SerializeField] private Sprite muteSound;
 
-        [Header("Elements")] [SerializeField] private GameObject leaderBoardPanel;
-        [SerializeField] private RectTransform player;
+        [Header("Elements")] [SerializeField] private RectTransform player;
         [SerializeField] private float jumpDuration;
         [SerializeField] private float jumpHeight;
         [SerializeField] private AnimationCurve playerEase;
@@ -82,12 +86,22 @@ namespace MenuUI
 
         public void OpenShop()
         {
-            //Todo: Shop Section 
+            shopPanel.SetActive(true);
         }
 
-        public void OpenLeaderBoardPanel()
+        public void CloseShop()
         {
-            //Todo: LeaderBoard Panel
+            shopPanel.SetActive(false);
+        }
+
+        public void OpenLeaderBoard()
+        {
+            leaderBoardPanel.SetActive(true);
+        }
+
+        public void CloseLeaderBoard()
+        {
+            leaderBoardPanel.SetActive(false);
         }
 
         public void OpenSettings()
@@ -130,6 +144,14 @@ namespace MenuUI
             }
         }
 
+        public void ExitAppPanel()
+        {
+            exitAppPanel.SetActive(true);
+        }
+        public void ExitAppCanceled()
+        {
+            exitAppPanel.SetActive(false);
+        }
         public void ExitGame()
         {
 #if UNITY_EDITOR
@@ -137,5 +159,6 @@ namespace MenuUI
 #endif
             Application.Quit();
         }
+        
     }
 }
