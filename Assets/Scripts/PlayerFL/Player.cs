@@ -12,8 +12,8 @@ namespace PlayerFL
         float maxDistance = 10f;
 
         // gyro properties
-        private float moveSpeedInGyro = 1000;
-        private float smoothTime = 1.5f;
+        private float moveSpeedInGyro;
+        private float smoothTime = 2f;
 
         private SpriteRenderer _spriteRenderer;
 
@@ -27,7 +27,7 @@ namespace PlayerFL
         private void Start()
         {
             Input.gyro.enabled = true;
-
+            moveSpeedInGyro = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 3000);
             
             m_Camera = Camera.main;
             bounds = ScreenUtils.GetWorldScreenSize();
@@ -58,6 +58,12 @@ namespace PlayerFL
             }
         }
 
+        public void PlayerMoveSensetive(int speed)
+        {
+            moveSpeedInGyro = speed;
+            DataPersistence.SaveInt(DataPersistence.gyroSensetiveKey, (int)moveSpeedInGyro);
+        }
+        
         /*private void PlayerControllerWithTuch()
         {
             if (Input.touchCount > 0)

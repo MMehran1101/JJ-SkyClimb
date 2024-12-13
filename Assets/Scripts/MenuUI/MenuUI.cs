@@ -29,15 +29,18 @@ namespace MenuUI
         [SerializeField] private Sprite unmuteSound;
         [SerializeField] private Sprite muteSound;
 
-        [Header("Elements")] [SerializeField] private RectTransform player;
+        [Header("Elements")] 
+        [SerializeField] private RectTransform player;
         [SerializeField] private float jumpDuration;
         [SerializeField] private float jumpHeight;
         [SerializeField] private AnimationCurve playerEase;
+        [SerializeField] private Slider sensetiveSlider;
 
 
         private void Start()
         {
             soundSp = soundSprite.GetComponent<Image>();
+            sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 3000);
             PlayerJumping();
             CheckSound();
             SetTexts();
@@ -114,6 +117,16 @@ namespace MenuUI
             settingsPanel.SetActive(false);
         }
 
+        public void IncreaseSensetive()
+        {
+            sensetiveSlider.value += 1000;
+            DataPersistence.SaveInt(DataPersistence.gyroSensetiveKey,(int)sensetiveSlider.value);
+        }
+        public void DecreaseSensetive()
+        {
+            sensetiveSlider.value -= 1000;
+            DataPersistence.SaveInt(DataPersistence.gyroSensetiveKey,(int)sensetiveSlider.value);
+        }
         private void CheckSound()
         {
             if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
@@ -148,10 +161,12 @@ namespace MenuUI
         {
             exitAppPanel.SetActive(true);
         }
+
         public void ExitAppCanceled()
         {
             exitAppPanel.SetActive(false);
         }
+
         public void ExitGame()
         {
 #if UNITY_EDITOR
@@ -159,6 +174,5 @@ namespace MenuUI
 #endif
             Application.Quit();
         }
-        
     }
 }

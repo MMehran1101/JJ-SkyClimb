@@ -5,7 +5,7 @@ public static class DataPersistence
     public const string soundKey = "SoundMuted";
     public const string highScoreKey = "HighScore";
     public const string coinKey = "Coin";
-    public const string isGyroKey = "Gyro";
+    public const string gyroSensetiveKey = "GyroSensetive";
 
     public static void SaveInt(string key, int newData)
     {
