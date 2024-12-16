@@ -183,3 +183,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6cf0d045d649c734b90888e82b1a0fb4, type: 3}
   - {fileID: 21300000, guid: 17deef8e39ca2a44b83954b3bd749da9, type: 3}
   frameDuration: 0.1
+  CoinCollectAudioClip: {fileID: 8300000, guid: 43bdcea262f6f5d4ebf22142fba48cb6, type: 3}

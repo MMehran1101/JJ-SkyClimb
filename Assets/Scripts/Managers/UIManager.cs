@@ -34,12 +34,14 @@ namespace Managers
         public void PauseGame()
         {
             pausePanel.SetActive(true);
+            SoundManager.Instance.ToggleMusic(true);
             Time.timeScale = 0;
         }
 
         public void ResumeGame()
         {
             pausePanel.SetActive(false);
+            SoundManager.Instance.ToggleMusic(false);
             Time.timeScale = 1;
         }
 
@@ -51,6 +53,7 @@ namespace Managers
 
         public void RestartGame()
         {
+            SoundManager.Instance.ToggleMusic(false);
             GameManager.Instance.RestartGame();
         }
 

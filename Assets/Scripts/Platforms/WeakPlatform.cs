@@ -29,7 +29,7 @@ namespace Platforms
                 _currentVelocity = col.gameObject.GetComponent<Rigidbody2D>().velocity.y;
                 if (_currentVelocity <= 0)
                 {
-                    SoundManager.Instance.PlaySound(jumpAudio);
+                    SoundManager.Instance.SetSoundClip(jumpAudio);
                     if (isVibrate) Vibration.Vibrate(100);
 
                     gameObject.GetComponent<Rigidbody2D>().gravityScale = 5;

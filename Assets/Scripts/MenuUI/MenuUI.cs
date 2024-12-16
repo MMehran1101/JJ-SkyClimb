@@ -15,31 +15,30 @@ namespace MenuUI
     {
         private Sequence jumpSequence;
         private Image soundSp;
+        private Image musicSp;
         private Image vibrationSp;
 
-        [Header("Panels")] [SerializeField] private GameObject settingsPanel;
-        [SerializeField] private GameObject shopPanel;
-        [SerializeField] private GameObject leaderBoardPanel;
-        [SerializeField] private GameObject exitAppPanel;
-
-        [Header("Texts")] [SerializeField] private TextMeshProUGUI highScoreText;
+        [Header("Texts")] [SerializeField] 
+        private TextMeshProUGUI highScoreText;
         [SerializeField] private TextMeshProUGUI coinText;
-
-
-        [Header("Sound")] [SerializeField] private AudioClip jumpClip;
-        [SerializeField] private GameObject soundSprite;
-        [SerializeField] private Sprite onSprite;
-        [SerializeField] private Sprite offSprite;
-
-        [Header("Elements")] 
+        [Header("Player On Menu Elements")] 
+        [SerializeField] private AudioClip jumpClip;
         [SerializeField] private RectTransform player;
         [SerializeField] private float jumpDuration;
         [SerializeField] private float jumpHeight;
         [SerializeField] private AnimationCurve playerEase;
+        [Header("Panels")] [SerializeField]
+        private GameObject settingsPanel;
+        [SerializeField] private GameObject shopPanel;
+        [SerializeField] private GameObject leaderBoardPanel;
+        [SerializeField] private GameObject exitAppPanel;
+        [Header("Settings Elements")] 
+        [SerializeField] private GameObject soundSprite;
+        [SerializeField] private GameObject musicSprite;
+        [SerializeField] private Sprite onSprite;
+        [SerializeField] private Sprite offSprite;
         [SerializeField] private Slider sensetiveSlider;
         [SerializeField] private GameObject vibrationSprite;
-
-
 
         private void Start()
         {
@@ -80,7 +79,7 @@ namespace MenuUI
                 {
                     if (jumpSequence.CompletedLoops() % 2 == 0)
                     {
-                        SoundManager.Instance.PlaySound(jumpClip);
+                        SoundManager.Instance.SetSoundClip(jumpClip);
                     }
                 });
         }
@@ -134,6 +133,7 @@ namespace MenuUI
         private void LoadSettingsData()
         {
             soundSp = soundSprite.GetComponent<Image>();
+            musicSp = musicSprite.GetComponent<Image>();
             vibrationSp = vibrationSprite.GetComponent<Image>();
             sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 2000);
             
@@ -141,14 +141,26 @@ namespace MenuUI
             if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
             {
                 soundSp.sprite = offSprite;
-                SoundManager.Instance.MuteSound(true);
+                SoundManager.Instance.ToggleSound(true);
             }
             else
             {
                 soundSp.sprite = onSprite;
-                SoundManager.Instance.MuteSound(false);
+                SoundManager.Instance.ToggleSound(false);
             }
             
+            // Music Data
+            if (DataPersistence.LoadInt(DataPersistence.musicKey, 1) == 0)
+            {
+                musicSp.sprite = offSprite;
+                SoundManager.Instance.ToggleMusic(true);
+            }
+            else
+            {
+                musicSp.sprite = onSprite;
+                SoundManager.Instance.ToggleMusic(false);
+            }
+
             // Vibration Data
             if (DataPersistence.LoadInt(DataPersistence.vibrationKey, 1) == 0)
             {
@@ -166,13 +178,29 @@ namespace MenuUI
             {
                 soundSp.sprite = onSprite;
                 DataPersistence.SaveInt(DataPersistence.soundKey, 1);
-                SoundManager.Instance.MuteSound(false);
+                SoundManager.Instance.ToggleSound(false);
             }
             else
             {
                 soundSp.sprite = offSprite;
                 DataPersistence.SaveInt(DataPersistence.soundKey, 0);
-                SoundManager.Instance.MuteSound(true);
+                SoundManager.Instance.ToggleSound(true);
+            }
+        }
+        
+        public void OnClickMusic()
+        {
+            if (DataPersistence.LoadInt(DataPersistence.musicKey, 1) == 0)
+            {
+                musicSp.sprite = onSprite;
+                DataPersistence.SaveInt(DataPersistence.musicKey, 1);
+                SoundManager.Instance.ToggleMusic(false);
+            }
+            else
+            {
+                musicSp.sprite = offSprite;
+                DataPersistence.SaveInt(DataPersistence.musicKey, 0);
+                SoundManager.Instance.ToggleMusic(true);
             }
         }
 

@@ -8,6 +8,11 @@ namespace Managers
 
         [SerializeField] private AudioSource effectSource;
         [SerializeField] private AudioSource musicSource;
+        [Header("Audio Clips")]
+        public AudioClip menuAudioClip;
+        public AudioClip gameAudioClip;
+        public AudioClip tapUIAudioClip;
+
         private bool isSoundMute;
 
         private void Awake()
@@ -23,27 +28,27 @@ namespace Managers
             }
         }
 
-        public void PlaySound(AudioClip clip)
+        public void SetSoundClip(AudioClip clip)
         {
             effectSource.PlayOneShot(clip);
+
         }
-    
-        public void MuteSound(bool isMute)
+        public void ToggleSound(bool isMute)
         {
-            var soundAudio = gameObject.GetComponent<AudioSource>();
-            soundAudio.mute = isMute;
+            effectSource.mute = isMute;
         }
-        public void PlayMusic(AudioClip clip, bool isLoop)
+
+        public void SetMusicClip(AudioClip clip, bool isLoop)
         {
-            musicSource.PlayOneShot(clip);
+            musicSource.clip = clip;
+            musicSource.Play();
             if (isLoop) musicSource.loop = true;
             else musicSource.loop = false;
         }
-        public void MuteMusic(bool isMute)
-        {
-            var soundAudio = gameObject.GetComponent<AudioSource>();
-            soundAudio.mute = isMute;
-        }
 
+        public void ToggleMusic(bool isMute)
+        {
+            musicSource.mute = isMute;
+        }
     }
 }

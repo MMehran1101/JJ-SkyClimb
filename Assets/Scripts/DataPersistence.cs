@@ -3,6 +3,7 @@ using UnityEngine;
 public static class DataPersistence
 {
     public const string soundKey = "SoundMuted";
+    public const string musicKey = "MusicMuted";
     public const string highScoreKey = "HighScore";
     public const string coinKey = "Coin";
     public const string gyroSensetiveKey = "GyroSensetive";

@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] private Sprite[] coinSprites;
     [SerializeField] private float frameDuration = 0.1f;
+    [SerializeField] private AudioClip CoinCollectAudioClip;
     private Sequence coinSequence;
     private SpriteRenderer spriteRenderer;
 
@@ -36,6 +37,7 @@ public class Coin : MonoBehaviour
         if (col.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             GameManager.Instance.SetCoin(2);
+            SoundManager.Instance.SetSoundClip(CoinCollectAudioClip);
             coinSequence.Kill();
             Destroy(gameObject);
         }

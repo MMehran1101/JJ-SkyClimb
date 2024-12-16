@@ -14,10 +14,11 @@ namespace Managers
 
         private BoxCollider2D _playerCollider;
         public static GameManager Instance;
+
         [SerializeField] private GameObject playerPrefab;
         [HideInInspector] public GameObject player;
         [SerializeField] private AudioClip gameOverClip;
-        
+
 
         private void Awake()
         {
@@ -54,10 +55,12 @@ namespace Managers
             {
                 player = Instantiate(playerPrefab, new Vector3(0, 2), quaternion.identity);
                 _playerCollider = player.GetComponent<BoxCollider2D>();
+                SoundManager.Instance.SetMusicClip(SoundManager.Instance.gameAudioClip, true);
                 isGameOver = false;
                 _score = 0;
                 _coins = 0;
             }
+            else if (scene.name == "Main Menu") SoundManager.Instance.SetMusicClip(SoundManager.Instance.menuAudioClip, true);
         }
 
         private void PlayerOnScreen()
@@ -78,12 +81,12 @@ namespace Managers
             {
                 return false;
             }
-            else 
+            else
             {
                 return true;
             }
         }
-        
+
 
         #region Score and Coins
 
@@ -140,14 +143,14 @@ namespace Managers
         {
             isGameOver = true;
             _playerCollider.isTrigger = true;
-            if(ReturnVibrationStatus()) Vibration.Vibrate(500);
-            
+            if (ReturnVibrationStatus()) Vibration.Vibrate(500);
+
             // add cions collected
             int totalCoin = DataPersistence.LoadInt(DataPersistence.coinKey, 0);
             totalCoin += _coins;
             DataPersistence.SaveInt(DataPersistence.coinKey, totalCoin);
 
-            SoundManager.Instance.PlaySound(gameOverClip);
+            SoundManager.Instance.SetMusicClip(gameOverClip,false);
             UIManager.Instance.EnableGameOverPanel();
 
             Destroy(player.gameObject, 2);
