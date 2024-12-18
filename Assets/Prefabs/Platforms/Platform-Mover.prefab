@@ -143,8 +143,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: -0.1}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.5, y: 0.1}
-  - {x: 0.5, y: 0.1}
+  - {x: -0.45, y: 0.1}
+  - {x: 0.45, y: 0.1}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -162,6 +162,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpAudio: {fileID: 8300000, guid: ef4396f54a01e6f46806da4a142d38f8, type: 3}
+  platformEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.50008166
+      value: 0.5001225
+      inSlope: 1.7583449
+      outSlope: 1.7583449
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09379774
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!50 &7392277785926525675
 Rigidbody2D:
   serializedVersion: 4
@@ -254,7 +287,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0026624203, y: 0.0046066046}
+  m_Offset: {x: -0.0050594807, y: 0.0094009}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -265,7 +298,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1496887, y: 0.10632753}
+  m_Size: {x: 0.9051795, y: 0.048796013}
   m_EdgeRadius: 0.05
 --- !u!50 &1372408096896721486
 Rigidbody2D:

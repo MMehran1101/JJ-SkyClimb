@@ -74,7 +74,7 @@ namespace MenuUI
             jumpSequence.Append(player.DOAnchorPosY(player.anchoredPosition.y + jumpHeight, jumpDuration)
                 .SetEase(playerEase));
 
-            jumpSequence.SetLoops(-1, LoopType.Yoyo)
+                jumpSequence.SetLoops(-1, LoopType.Yoyo)
                 .OnStepComplete(() =>
                 {
                     if (jumpSequence.CompletedLoops() % 2 == 0)
