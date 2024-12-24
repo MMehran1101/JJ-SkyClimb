@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Managers;
 using UnityEngine;
@@ -41,5 +42,10 @@ public class Coin : MonoBehaviour
             coinSequence.Kill();
             Destroy(gameObject);
         }
+    }
+
+    private void OnDisable()
+    {
+        coinSequence.Kill();
     }
 }

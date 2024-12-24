@@ -42,7 +42,6 @@ namespace MenuUI
 
         private void Start()
         {
-            
             PlayerJumping();
             LoadSettingsData();
             SetTexts();

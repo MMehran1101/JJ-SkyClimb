@@ -1,4 +1,3 @@
-using System;
 using Utilities;
 using Unity.Mathematics;
 using UnityEngine;

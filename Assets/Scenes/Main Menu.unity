@@ -5248,6 +5248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97286329471f48d478b50e48ba88b326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformSpawnPos: {x: 0, y: 0}
   playerPrefab: {fileID: 2149345226551109003, guid: 4297cf4124e631d4fbbfeba6d4721cb6, type: 3}
   player: {fileID: 0}
   gameOverClip: {fileID: 8300000, guid: 9e1a6031d06f1c3438d4e7570687018f, type: 3}

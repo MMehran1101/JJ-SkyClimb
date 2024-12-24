@@ -27,9 +27,9 @@ namespace Platforms
             AnimateMoving();
         }
 
-        private void LateUpdate()
+        private void Update()
         {
-            if (gameObject.transform.position.y < screenSize.y)
+            if (gameObject.transform.position.y < ScreenUtils.GetCameraSize().y)
                 Destroy(gameObject, 1);
         }
 

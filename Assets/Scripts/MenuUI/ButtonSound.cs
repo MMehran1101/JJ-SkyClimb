@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonSound : MonoBehaviour
+namespace MenuUI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ButtonSound : MonoBehaviour
     {
-        GetComponent<Button>().onClick.AddListener(PlayTapSound);
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            GetComponent<Button>().onClick.AddListener(PlayTapSound);
+        }
 
-    void PlayTapSound()
-    {
-        SoundManager.Instance.SetSoundClip(SoundManager.Instance.tapUIAudioClip);
+        void PlayTapSound()
+        {
+            SoundManager.Instance.SetSoundClip(SoundManager.Instance.tapUIAudioClip);
+        }
     }
 }
