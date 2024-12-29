@@ -59,7 +59,8 @@ namespace Managers
                 _score = 0;
                 _coins = 0;
             }
-            else if (scene.name == "Main Menu") SoundManager.Instance.SetMusicClip(SoundManager.Instance.menuAudioClip, true);
+            else if (scene.name == "Main Menu")
+                SoundManager.Instance.SetMusicClip(SoundManager.Instance.menuAudioClip, true);
         }
 
         private void PlayerOnScreen()
@@ -140,19 +141,22 @@ namespace Managers
 
         public void GameOver()
         {
-            isGameOver = true;
-            _playerCollider.isTrigger = true;
-            if (ReturnVibrationStatus()) Vibration.Vibrate(500);
+            if (!isGameOver)
+            {
+                isGameOver = true;
+                _playerCollider.isTrigger = true;
+                if (ReturnVibrationStatus()) Vibration.Vibrate(500);
 
-            // add cions collected
-            int totalCoin = DataPersistence.LoadInt(DataPersistence.coinKey, 0);
-            totalCoin += _coins;
-            DataPersistence.SaveInt(DataPersistence.coinKey, totalCoin);
+                // add cions collected
+                int totalCoin = DataPersistence.LoadInt(DataPersistence.coinKey, 0);
+                totalCoin += _coins;
+                DataPersistence.SaveInt(DataPersistence.coinKey, totalCoin);
 
-            SoundManager.Instance.SetMusicClip(gameOverClip,false);
-            UIManager.Instance.EnableGameOverPanel();
+                SoundManager.Instance.SetMusicClip(gameOverClip, false);
+                UIManager.Instance.EnableGameOverPanel();
 
-            Destroy(player.gameObject, 2);
+                Destroy(player.gameObject, 2);
+            }
         }
     }
 }

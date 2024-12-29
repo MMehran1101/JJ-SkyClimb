@@ -22,13 +22,18 @@ namespace PlayerFL
         private Vector3 lastTouchPos;
         private Vector3 direction;
         private Camera m_Camera;
+        private Rigidbody2D playerRb;
 
+        [SerializeField] private Sprite lookDown;
+        [SerializeField] private Sprite lookUpLeft;
+        [SerializeField] private Sprite lookUpRight;
 
         private void Start()
         {
             Input.gyro.enabled = true;
             moveSpeedInGyro = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 3000);
-            
+
+            playerRb = gameObject.GetComponent<Rigidbody2D>();
             m_Camera = Camera.main;
             bounds = ScreenUtils.GetWorldScreenSize();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -42,7 +47,6 @@ namespace PlayerFL
 
         private void PlayerControllerWithGyroscope()
         {
-            
             if (Input.gyro.enabled)
             {
                 float gyroInput = Input.acceleration.x;
@@ -51,19 +55,13 @@ namespace PlayerFL
 
                 Vector2 targetPosition = new Vector2(gyroInput * moveSpeedInGyro * Time.deltaTime, position.y);
 
-                FlipSprite(_spriteRenderer, position.x, targetPosition.x, .2f);
+                PlayerAnimation(_spriteRenderer, position.x, targetPosition.x, .2f);
 
                 position = Vector2.SmoothDamp(position, targetPosition, ref currentVelocity, smoothTime);
                 transform.position = position;
             }
         }
 
-        public void PlayerMoveSensetive(int speed)
-        {
-            moveSpeedInGyro = speed;
-            DataPersistence.SaveInt(DataPersistence.gyroSensetiveKey, (int)moveSpeedInGyro);
-        }
-        
         /*private void PlayerControllerWithTuch()
         {
             if (Input.touchCount > 0)
@@ -88,7 +86,7 @@ namespace PlayerFL
 
                         transform.position += direction * (touchSpeed * moveSpeed * Time.deltaTime);
 
-                        FlipSprite(_spriteRenderer, lastTouchPos.x, touchPos.x, 0);
+                        PlayerAnimation(_spriteRenderer, lastTouchPos.x, touchPos.x, 0);
 
                         lastTouchPos.x = touchPos.x;
                         break;
@@ -101,12 +99,20 @@ namespace PlayerFL
         }
 */
 
-        private void FlipSprite(SpriteRenderer spriteR, float position, float nextPostition, float offset)
+        private void PlayerAnimation(SpriteRenderer spriteR, float position, float nextPostition, float offset)
         {
-            if (position + offset < nextPostition)
-                spriteR.flipX = false;
-            else if (position - offset > nextPostition)
-                spriteR.flipX = true;
+            if (playerRb.velocity.y < 0)
+            {
+                spriteR.sprite = lookDown;
+            }
+            else if (playerRb.velocity.y > 0 && position + offset < nextPostition)
+            {
+                spriteR.sprite = lookUpRight;
+            }
+            else if (playerRb.velocity.y > 0 && position - offset > nextPostition)
+            {
+                spriteR.sprite = lookUpLeft;
+            }
         }
 
         private void CheckXBounds()
@@ -126,6 +132,5 @@ namespace PlayerFL
 
             transform.position = position;
         }
-        
     }
 }

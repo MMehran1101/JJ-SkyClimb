@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6436023092606405901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1832414907265050262}
+  - component: {fileID: 2264212767489200897}
+  m_Layer: 0
+  m_Name: Level-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1832414907265050262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6436023092606405901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2264212767489200897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6436023092606405901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f21213225c02442ba84f2455a4090f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRedius: 0.3
+  minSpawnRange: 0.4
+  maxSpawnRange: 0.6
+  NormalPrefabs:
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 2329222001834442903, guid: 7310cd1171f192c4b99014893c0c30b1, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
+  WeakPrefabs:
+  - {fileID: 4777023188797152690, guid: 2994ac7e09ed8fb42bbfb24fac2f3a6b, type: 3}
+  - {fileID: 4777023188797152690, guid: 2994ac7e09ed8fb42bbfb24fac2f3a6b, type: 3}
+  - {fileID: 4777023188797152690, guid: 2994ac7e09ed8fb42bbfb24fac2f3a6b, type: 3}
+  PowerUPPrefabs:
+  - {fileID: 1501179085496329881, guid: ce0c6b85da2b87f4ca98815ffcc4ce79, type: 3}
+  MoverPrefabs:
+  - {fileID: 6113430699798577720, guid: d147f94f77a4dad468a4699876e0d651, type: 3}
+  - {fileID: 6113430699798577720, guid: d147f94f77a4dad468a4699876e0d651, type: 3}

@@ -42,13 +42,6 @@ namespace Managers
         {
             bounds = ScreenUtils.GetWorldScreenSize();
             platformOffset = ScreenUtils.GetObjectOffset(normalPlatform);
-            Instantiate(easyyyyyyyy, new Vector3(0, 1, 0), quaternion.identity);
-            Instantiate(easyyyyyyyy, new Vector3(0, 1, 0), quaternion.identity);
-            Instantiate(easyyyyyyyy, new Vector3(0, 1, 0), quaternion.identity);
-            Instantiate(easyyyyyyyy, new Vector3(0, 1, 0), quaternion.identity);
-            Instantiate(easyyyyyyyy, new Vector3(0, 1, 0), quaternion.identity);
-            Instantiate(easyyyyyyyy, new Vector3(0, 1, 0), quaternion.identity);
-            Instantiate(easyyyyyyyy, new Vector3(0, 1, 0), quaternion.identity);
             //SpawnPlatform();
         }
 

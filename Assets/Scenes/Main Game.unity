@@ -544,7 +544,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db64a50ad6b478c48891e8b0de21b30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyPrefab: {fileID: 6436023092606405901, guid: cfab39ecb1a5023459dddb6ff4c6d4c0, type: 3}
+  platformWaves:
+  - {fileID: 6436023092606405901, guid: cfab39ecb1a5023459dddb6ff4c6d4c0, type: 3}
+  - {fileID: 6436023092606405901, guid: 9389b4db1c521524bb63934ba74bbcd0, type: 3}
+  - {fileID: 6436023092606405901, guid: ff5e911a4ab8a994daad9c178afa4a9d, type: 3}
+  - {fileID: 6436023092606405901, guid: 0eba8154d4329c94eab4612febf6fcd3, type: 3}
+  enemyWaves:
+  - {fileID: 5288200972252507844, guid: bff5e32132c27074186abaec5928a206, type: 3}
+  platformSpawnPos: {x: 0, y: 0, z: 0}
 --- !u!4 &217433991
 Transform:
   m_ObjectHideFlags: 0

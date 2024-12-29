@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Managers;
 using UnityEngine;
@@ -14,7 +15,6 @@ namespace Platforms
         [SerializeField] private AudioClip jumpAudio;
 
         [SerializeField] private AnimationCurve platformEase;
-        private Sequence moveSequence;
         private bool moveRight = true;
         private float moveDuration = 3;
         private float moveDistance;
@@ -24,7 +24,7 @@ namespace Platforms
         {
             screenSize = ScreenUtils.GetCameraSize();
             moveDistance = screenSize.x + (ScreenUtils.GetObjectOffset(gameObject) / 2);
-            AnimateMoving();
+            AnimateMoving(true);
         }
 
         private void Update()
@@ -33,21 +33,29 @@ namespace Platforms
                 Destroy(gameObject, 1);
         }
 
-        private void AnimateMoving()
+        private void AnimateMoving(bool isPlay)
         {
-            float targetPositionX;
-            if (moveRight)
-                targetPositionX = moveDistance;
-            else
-                targetPositionX = -moveDistance;
+            if (isPlay)
+            {
+                float targetPositionX;
+                if (moveRight)
+                    targetPositionX = moveDistance;
+                else
+                    targetPositionX = -moveDistance;
 
-            transform.DOMoveX(targetPositionX, moveDuration)
-                .SetEase(platformEase)
-                .OnComplete(() =>
-                {
-                    moveRight = !moveRight;
-                    AnimateMoving();
-                });
+                transform.DOMoveX(targetPositionX, moveDuration)
+                    .SetEase(platformEase)
+                    .OnComplete(() =>
+                    {
+                        moveRight = !moveRight;
+                        AnimateMoving(true);
+                    });
+            }
+        }
+
+        private void OnDestroy()
+        {
+            AnimateMoving(false);
         }
 
         private void OnCollisionEnter2D(Collision2D col)

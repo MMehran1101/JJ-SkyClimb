@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1832414907265050262}
   - component: {fileID: 2264212767489200897}
   m_Layer: 0
-  m_Name: EasyPlatforms
+  m_Name: Level-0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f21213225c02442ba84f2455a4090f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyPrefab: {fileID: 6436023092606405901}
+  spawnRedius: 0.1
   minSpawnRange: 0.2
-  maxSpawnRange: 0.5
+  maxSpawnRange: 0.2
   NormalPrefabs:
   - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
   - {fileID: 4665964678810942972, guid: 08a4620d19fd8aa42b255e341eb2533d, type: 3}
