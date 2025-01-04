@@ -37,13 +37,11 @@ namespace Managers
         {
             effectSource.mute = isMute;
         }
-
-        public void SetMusicClip(AudioClip clip, bool isLoop)
+        
+        public void SetMusicClip(AudioClip clip)
         {
             musicSource.clip = clip;
             musicSource.Play();
-            if (isLoop) musicSource.loop = true;
-            else musicSource.loop = false;
         }
 
         public void ToggleMusic(bool isMute)

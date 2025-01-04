@@ -6,6 +6,7 @@ namespace Managers
 {
     public class UIManager : MonoBehaviour
     {
+        private bool musicState;
         [Header("Texts")] 
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI scoreTextOnGameOver;
@@ -28,20 +29,17 @@ namespace Managers
             SetScoreText(GameManager.Instance.UpdateScore());
             SetHighScoreText(GameManager.Instance.CheckHighScore());
         }
-
         #region Buttons
 
         public void PauseGame()
         {
             pausePanel.SetActive(true);
-            SoundManager.Instance.ToggleMusic(true);
             Time.timeScale = 0;
         }
 
         public void ResumeGame()
         {
             pausePanel.SetActive(false);
-            SoundManager.Instance.ToggleMusic(false);
             Time.timeScale = 1;
         }
 
@@ -53,7 +51,6 @@ namespace Managers
 
         public void RestartGame()
         {
-            SoundManager.Instance.ToggleMusic(false);
             GameManager.Instance.RestartGame();
         }
 

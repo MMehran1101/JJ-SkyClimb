@@ -42,6 +42,7 @@ namespace MenuUI
 
         private void Start()
         {
+            SoundManager.Instance.SetMusicClip(SoundManager.Instance.menuAudioClip);
             PlayerJumping();
             LoadSettingsData();
             SetTexts();
@@ -54,7 +55,7 @@ namespace MenuUI
                 jumpSequence.Kill();
             }
         }
-
+        
         private void SetTexts()
         {
             coinText.text = DataPersistence.LoadInt(DataPersistence.coinKey, 0).ToString();

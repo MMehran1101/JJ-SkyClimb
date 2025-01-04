@@ -54,13 +54,11 @@ namespace Managers
             {
                 player = Instantiate(playerPrefab, new Vector3(0, 2), quaternion.identity);
                 _playerCollider = player.GetComponent<BoxCollider2D>();
-                SoundManager.Instance.SetMusicClip(SoundManager.Instance.gameAudioClip, true);
+                SoundManager.Instance.SetMusicClip(SoundManager.Instance.gameAudioClip);
                 isGameOver = false;
                 _score = 0;
                 _coins = 0;
             }
-            else if (scene.name == "Main Menu")
-                SoundManager.Instance.SetMusicClip(SoundManager.Instance.menuAudioClip, true);
         }
 
         private void PlayerOnScreen()
@@ -152,7 +150,7 @@ namespace Managers
                 totalCoin += _coins;
                 DataPersistence.SaveInt(DataPersistence.coinKey, totalCoin);
 
-                SoundManager.Instance.SetMusicClip(gameOverClip, false);
+                SoundManager.Instance.SetMusicClip(gameOverClip);
                 UIManager.Instance.EnableGameOverPanel();
 
                 Destroy(player.gameObject, 2);
