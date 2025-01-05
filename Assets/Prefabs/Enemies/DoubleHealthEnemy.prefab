@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2655666175777236866}
   - component: {fileID: 2655666175777236870}
   - component: {fileID: 1236242424140450222}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DoubleHealthEnemy
   m_TagString: DoubleHealth
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 2655666176417076571}
   - component: {fileID: 2655666176417076548}
   - component: {fileID: 2655666176417076549}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DoubleHealthOfEnemy
   m_TagString: DoubleHealth
   m_Icon: {fileID: 0}

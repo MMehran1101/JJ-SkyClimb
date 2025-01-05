@@ -44,6 +44,15 @@ namespace Managers
             musicSource.Play();
         }
 
+        public void PlayOrStopMusic(bool isStop)
+        {
+            if (isStop)
+            {
+                musicSource.Pause();
+            }
+            else musicSource.Play();
+        }
+
         public void ToggleMusic(bool isMute)
         {
             musicSource.mute = isMute;

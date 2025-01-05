@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5844761925419477029}
   - component: {fileID: 5844761925419477025}
   - component: {fileID: -8735569785634054517}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlueEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 5844761926055222012}
   - component: {fileID: 5844761926055221987}
   - component: {fileID: 5844761926055221986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HeadOfEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

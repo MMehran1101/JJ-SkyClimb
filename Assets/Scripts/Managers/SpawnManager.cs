@@ -69,7 +69,7 @@ namespace Managers
 
         private void EnemyChanceToSpawn(GameObject enemy)
         {
-            var chance = Random.Range(0, 7);
+            var chance = Random.Range(1, 10);
             if (chance % 2 == 0)
             {
                 Instantiate(enemy, platformSpawnPos, quaternion.identity, gameObject.transform);

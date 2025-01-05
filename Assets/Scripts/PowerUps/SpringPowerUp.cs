@@ -32,7 +32,6 @@ namespace PowerUps
                 var playerVelocity = playerRb.velocity;
                 playerVelocity.y = 700 * Time.deltaTime;
                 playerRb.velocity = playerVelocity;
-                
             }
         }
     }
