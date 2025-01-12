@@ -11,6 +11,9 @@ namespace Utilities
 
         private void Start()
         {
+            // Mobile Screen Never Shut Down
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
             GameObject player = GameManager.Instance.player.gameObject;
             playerTransform = player.GetComponent<Transform>();
         }
