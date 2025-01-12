@@ -34,14 +34,14 @@ namespace Managers
         public void PauseGame()
         {
             pausePanel.SetActive(true);
-            SoundManager.Instance.PlayOrStopMusic(true);
+            SoundManager.Instance.PauseMusic();
             Time.timeScale = 0;
         }
 
         public void ResumeGame()
         {
             pausePanel.SetActive(false);
-            SoundManager.Instance.PlayOrStopMusic(false);
+            SoundManager.Instance.ResumeMusic();
             Time.timeScale = 1;
         }
 

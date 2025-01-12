@@ -45,21 +45,21 @@ namespace Managers
         {
             switch (GameManager.Instance.GetScore())
             {
-                case < 100:
+                case < 150:
                     Instantiate(platformWaves[0], platformSpawnPos, quaternion.identity, gameObject.transform);
                     platformWavesCount += 1;
                     break;
-                case > 100 and < 500:
+                case > 150 and < 800:
                     Instantiate(platformWaves[1], platformSpawnPos, quaternion.identity, gameObject.transform);
                     platformWavesCount += 1;
                     EnemyChanceToSpawn(enemyWaves[0]);
                     break;
-                case > 500 and < 1000:
+                case > 800 and < 1300:
                     Instantiate(platformWaves[2], platformSpawnPos, quaternion.identity, gameObject.transform);
                     platformWavesCount += 1;
                     EnemyChanceToSpawn(enemyWaves[0]);
                     break;
-                case > 1000:
+                case > 1300:
                     Instantiate(platformWaves[3], platformSpawnPos, quaternion.identity, gameObject.transform);
                     platformWavesCount += 1;
                     EnemyChanceToSpawn(enemyWaves[0]);
@@ -69,8 +69,8 @@ namespace Managers
 
         private void EnemyChanceToSpawn(GameObject enemy)
         {
-            var chance = Random.Range(1, 10);
-            if (chance % 2 == 0)
+            var chance = Random.Range(1, 100);
+            if (chance < 30)
             {
                 Instantiate(enemy, platformSpawnPos, quaternion.identity, gameObject.transform);
             }

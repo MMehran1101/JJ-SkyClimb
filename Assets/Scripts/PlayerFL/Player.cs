@@ -13,11 +13,10 @@ namespace PlayerFL
 
         // gyro properties
         private float moveSpeedInGyro;
-        private float smoothTime = 2f;
 
         private SpriteRenderer _spriteRenderer;
 
-        private Vector2 currentVelocity = Vector2.zero;
+        private Vector2 previousPosition;
         private Vector2 bounds;
         private Vector3 lastTouchPos;
         private Vector3 direction;
@@ -31,7 +30,7 @@ namespace PlayerFL
         private void Start()
         {
             Input.gyro.enabled = true;
-            moveSpeedInGyro = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 3000);
+            moveSpeedInGyro = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 10);
 
             playerRb = gameObject.GetComponent<Rigidbody2D>();
             m_Camera = Camera.main;
@@ -53,12 +52,15 @@ namespace PlayerFL
 
                 var position = transform.position;
 
-                Vector2 targetPosition = new Vector2(gyroInput * moveSpeedInGyro * Time.deltaTime, position.y);
+                float newXPosition = position.x + gyroInput * moveSpeedInGyro * Time.deltaTime;
+                float newYPosition = position.y;
 
-                PlayerAnimation(_spriteRenderer, position.x, targetPosition.x, .2f);
-
-                position = Vector2.SmoothDamp(position, targetPosition, ref currentVelocity, smoothTime);
+                position.x = newXPosition;
                 transform.position = position;
+
+                PlayerAnimation(_spriteRenderer, previousPosition.x, position.x, previousPosition.y, position.y);
+
+                previousPosition = position;
             }
         }
 
@@ -99,21 +101,30 @@ namespace PlayerFL
         }
 */
 
-        private void PlayerAnimation(SpriteRenderer spriteR, float position, float nextPostition, float offset)
+        private void PlayerAnimation(SpriteRenderer spriteRenderer, float previousX, float currentX, float previousY, float currentY)
         {
-            if (playerRb.velocity.y < 0)
+            float deltaX = currentX - previousX;
+            float deltaY = currentY - previousY;
+
+            if (deltaY > 0)
             {
-                spriteR.sprite = lookDown;
+                if (deltaX > 0)
+                {
+                    spriteRenderer.sprite = lookUpRight;
+                    
+                }
+                else if (deltaX < 0)
+                {
+                    spriteRenderer.sprite = lookUpLeft;
+                }
+
             }
-            else if (playerRb.velocity.y > 0 && position + offset < nextPostition)
+            else if (deltaY < 0)
             {
-                spriteR.sprite = lookUpRight;
-            }
-            else if (playerRb.velocity.y > 0 && position - offset > nextPostition)
-            {
-                spriteR.sprite = lookUpLeft;
+                spriteRenderer.sprite = lookDown; 
             }
         }
+
 
         private void CheckXBounds()
         {

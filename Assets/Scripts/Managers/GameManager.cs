@@ -150,7 +150,8 @@ namespace Managers
                 totalCoin += _coins;
                 DataPersistence.SaveInt(DataPersistence.coinKey, totalCoin);
 
-                SoundManager.Instance.SetMusicClip(gameOverClip);
+                SoundManager.Instance.SetSoundClip(gameOverClip);
+                SoundManager.Instance.StopMusic();
                 UIManager.Instance.EnableGameOverPanel();
 
                 Destroy(player.gameObject, 2);

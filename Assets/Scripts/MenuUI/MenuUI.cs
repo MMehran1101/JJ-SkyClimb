@@ -122,12 +122,12 @@ namespace MenuUI
 
         public void IncreaseSensetive()
         {
-            sensetiveSlider.value += 1000;
+            sensetiveSlider.value += 5;
             DataPersistence.SaveInt(DataPersistence.gyroSensetiveKey,(int)sensetiveSlider.value);
         }
         public void DecreaseSensetive()
         {
-            sensetiveSlider.value -= 1000;
+            sensetiveSlider.value -= 5;
             DataPersistence.SaveInt(DataPersistence.gyroSensetiveKey,(int)sensetiveSlider.value);
         }
         private void LoadSettingsData()
@@ -135,7 +135,7 @@ namespace MenuUI
             soundSp = soundSprite.GetComponent<Image>();
             musicSp = musicSprite.GetComponent<Image>();
             vibrationSp = vibrationSprite.GetComponent<Image>();
-            sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 2000);
+            sensetiveSlider.value = DataPersistence.LoadInt(DataPersistence.gyroSensetiveKey, 10);
             
             // Sound Data
             if (DataPersistence.LoadInt(DataPersistence.soundKey, 1) == 0)
