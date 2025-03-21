@@ -1,2 +1,3 @@
-# DoodleJump_MehranFallah
-Doodle Jump
+# Jungle Jump : SkyClimb
+
+This game was inspired by the game Doodle Jump.
