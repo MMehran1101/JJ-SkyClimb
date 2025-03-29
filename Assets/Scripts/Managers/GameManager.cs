@@ -52,6 +52,8 @@ namespace Managers
             Debug.Log("new scene : " + scene.name);
             if (scene.name == "Main Game")
             {
+                InvokeRepeating(nameof(UpdateScore), .1f, .1f);
+
                 player = Instantiate(playerPrefab, new Vector3(0, 2), quaternion.identity);
                 _playerCollider = player.GetComponent<BoxCollider2D>();
                 SoundManager.Instance.SetMusicClip(SoundManager.Instance.gameAudioClip);
@@ -88,16 +90,15 @@ namespace Managers
 
         #region Score and Coins
 
-        public int UpdateScore()
+        public void UpdateScore()
         {
             var score = player.transform.position.y * 10;
 
-            if (score > _score)
+            if ((int)score > _score)
             {
                 _score = (int)score;
+                EventManager.ScoreChanged(_score);
             }
-
-            return _score;
         }
 
         public int CheckHighScore()
