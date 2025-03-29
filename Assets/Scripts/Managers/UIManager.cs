@@ -9,14 +9,12 @@ namespace Managers
     public class UIManager : MonoBehaviour
     {
         private bool musicState;
-        [Header("Texts")] 
-        [SerializeField] private TextMeshProUGUI scoreText;
+        [Header("Texts")] [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI scoreTextOnGameOver;
         [SerializeField] private TextMeshProUGUI highScoreText;
         [SerializeField] private TextMeshProUGUI coinText;
-        
-        [Header("Panels")]
-        [SerializeField] private GameObject gameOverPanel;
+
+        [Header("Panels")] [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject pausePanel;
         public static UIManager Instance;
 
@@ -28,17 +26,18 @@ namespace Managers
         private void Update()
         {
             SetCoinText(GameManager.Instance.GetCoins());
-            SetHighScoreText(GameManager.Instance.CheckHighScore());
         }
 
         private void OnEnable()
         {
             EventManager.onScoreChanged += SetScoreText;
+            EventManager.onGameOver += SetHighScoreText;
         }
 
         private void OnDisable()
         {
-            EventManager.onScoreChanged  -= SetScoreText;
+            EventManager.onScoreChanged -= SetScoreText;
+            EventManager.onGameOver -= SetHighScoreText;
         }
 
         #region Buttons
@@ -69,7 +68,7 @@ namespace Managers
         }
 
         #endregion
-        
+
         #region Texts Elements
 
         private void SetScoreText(int score)
@@ -78,9 +77,9 @@ namespace Managers
             scoreTextOnGameOver.text = scoreText.text;
         }
 
-        private void SetHighScoreText(int highScore)
+        private void SetHighScoreText()
         {
-            highScoreText.text = highScore.ToString();
+            highScoreText.text = DataPersistence.LoadInt(DataPersistence.highScoreKey, 0).ToString();
         }
 
         private void SetCoinText(int coins)
@@ -89,7 +88,7 @@ namespace Managers
         }
 
         #endregion
-        
+
         public void EnableGameOverPanel()
         {
             gameOverPanel.SetActive(true);

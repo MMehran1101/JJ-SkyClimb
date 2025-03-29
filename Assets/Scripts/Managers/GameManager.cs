@@ -92,26 +92,24 @@ namespace Managers
 
         public void UpdateScore()
         {
-            var score = player.transform.position.y * 10;
-
-            if ((int)score > _score)
+            if (player != null)
             {
-                _score = (int)score;
-                EventManager.ScoreChanged(_score);
+                var score = player.transform.position.y * 10;
+                if ((int)score > _score)
+                {
+                    _score = (int)score;
+                    EventManager.ScoreChanged(_score);
+                }
             }
         }
 
-        public int CheckHighScore()
+        private void CheckHighScore()
         {
             var highscore = DataPersistence.LoadInt(DataPersistence.highScoreKey, 0);
-
             if (_score > highscore)
             {
                 DataPersistence.SaveInt(DataPersistence.highScoreKey, _score);
-                return _score;
             }
-            else
-                return highscore;
         }
 
         public int GetScore()
@@ -143,6 +141,9 @@ namespace Managers
             if (!isGameOver)
             {
                 isGameOver = true;
+                CheckHighScore();
+                EventManager.GameOver();
+                
                 _playerCollider.isTrigger = true;
                 if (ReturnVibrationStatus()) Vibration.Vibrate(500);
 
