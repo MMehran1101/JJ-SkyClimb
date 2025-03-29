@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,9 +28,19 @@ namespace Managers
         private void Update()
         {
             SetCoinText(GameManager.Instance.GetCoins());
-            SetScoreText(GameManager.Instance.UpdateScore());
             SetHighScoreText(GameManager.Instance.CheckHighScore());
         }
+
+        private void OnEnable()
+        {
+            EventManager.onScoreChanged += SetScoreText;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.onScoreChanged  -= SetScoreText;
+        }
+
         #region Buttons
 
         public void PauseGame()
